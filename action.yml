@@ -1,0 +1,162 @@
+name: DT074 Adaptive Security Gate
+description: >-
+  SAST (Semgrep) + secret scan (Gitleaks) + SBOM (Syft) + SCA (Trivy) with a
+  risk-based policy threshold engine, differential scanning and in-context
+  developer feedback. All scanners are version-pinned inside one container.
+author: Nguyen Le Anh Truc (DT074)
+branding:
+  icon: shield
+  color: blue
+
+inputs:
+  mode:
+    description: "adaptive (differential, risk-based) or baseline (full scan, zero tolerance)"
+    default: adaptive
+  base:
+    description: "Base ref for differential scanning. Default: PR base branch, or the previous commit on push."
+    default: ""
+  policy:
+    description: "Path (inside the repo) to a custom policy YAML. Default: the bundled policy for the mode."
+    default: ""
+  fail-on-block:
+    description: "Fail the job when the gate decision is BLOCK"
+    default: "true"
+  comment-on-pr:
+    description: "Post / update the feedback as a PR comment"
+    default: "true"
+  upload-sarif:
+    description: "Upload findings.sarif to GitHub code scanning"
+    default: "false"
+  override-label:
+    description: "PR label that enables an audited emergency override"
+    default: security-override
+  github-token:
+    description: "Token used for PR comments"
+    default: ${{ github.token }}
+
+outputs:
+  decision:
+    description: PASS, BLOCK or OVERRIDDEN
+    value: ${{ steps.gate.outputs.decision }}
+  blocking:
+    description: Number of blocking findings
+    value: ${{ steps.gate.outputs.blocking }}
+  report-dir:
+    description: Directory with decision.json, findings.json, SARIF, SBOM and feedback
+    value: ${{ steps.gate.outputs.report_dir }}
+
+runs:
+  using: composite
+  steps:
+    - uses: docker/setup-buildx-action@v3
+
+    - name: Build pinned scanner image (cached)
+      uses: docker/build-push-action@v6
+      with:
+        context: ${{ github.action_path }}
+        load: true
+        tags: dt074-security-gate:action
+        cache-from: type=gha,scope=dt074-gate
+        cache-to: type=gha,scope=dt074-gate,mode=max
+
+    - name: Resolve diff base and emergency override
+      id: ctx
+      shell: bash
+      env:
+        INPUT_BASE: ${{ inputs.base }}
+        OVERRIDE_LABEL: ${{ inputs.override-label }}
+      run: |
+        set -euo pipefail
+        base="$INPUT_BASE"
+        if [ -z "$base" ]; then
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ] || [ "${GITHUB_EVENT_NAME}" = "pull_request_target" ]; then
+            base="origin/$(jq -r .pull_request.base.ref "$GITHUB_EVENT_PATH")"
+            git fetch --no-tags origin "$(jq -r .pull_request.base.ref "$GITHUB_EVENT_PATH")"
+          else
+            before="$(jq -r '.before // empty' "$GITHUB_EVENT_PATH")"
+            if [ -n "$before" ] && [ "$before" != "0000000000000000000000000000000000000000" ] \
+               && git cat-file -e "$before^{commit}" 2>/dev/null; then base="$before"
+            else base="HEAD~1"; fi
+          fi
+        fi
+        echo "base=$base" >> "$GITHUB_OUTPUT"
+        # Emergency override: label present AND an 'Override-Reason:' line in the PR body.
+        reason=""
+        if jq -e --arg l "$OVERRIDE_LABEL" '.pull_request.labels[]?.name | select(. == $l)' "$GITHUB_EVENT_PATH" >/dev/null 2>&1; then
+          reason="$(jq -r '.pull_request.body // ""' "$GITHUB_EVENT_PATH" | grep -m1 -i '^Override-Reason:' | cut -d: -f2- | xargs || true)"
+        fi
+        {
+          echo "override_reason<<EOF"; echo "$reason"; echo "EOF"
+        } >> "$GITHUB_OUTPUT"
+
+    - name: Run security gate
+      id: gate
+      shell: bash
+      env:
+        GATE_OVERRIDE_REASON: ${{ steps.ctx.outputs.override_reason }}
+        GATE_OVERRIDE_ACTOR: ${{ github.actor }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_POLICY: ${{ inputs.policy }}
+        BASE: ${{ steps.ctx.outputs.base }}
+      run: |
+        set +e
+        args=(--mode "$INPUT_MODE" --repo /work --out /work/.gate-out)
+        [ "$INPUT_MODE" = "adaptive" ] && args+=(--base "$BASE")
+        [ -n "$INPUT_POLICY" ] && args+=(--policy "/work/$INPUT_POLICY")
+        docker run --rm -v "$GITHUB_WORKSPACE:/work" \
+          -e GATE_OVERRIDE_REASON -e GATE_OVERRIDE_ACTOR \
+          dt074-security-gate:action "${args[@]}"
+        code=$?
+        set -e
+        sudo chown -R "$(id -u):$(id -g)" "$GITHUB_WORKSPACE/.gate-out" || true
+        d="$GITHUB_WORKSPACE/.gate-out"
+        echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+        echo "report_dir=$d" >> "$GITHUB_OUTPUT"
+        echo "decision=$(jq -r .decision "$d/decision.json" 2>/dev/null || echo ERROR)" >> "$GITHUB_OUTPUT"
+        echo "blocking=$(jq -r .counts.blocking "$d/decision.json" 2>/dev/null || echo -1)" >> "$GITHUB_OUTPUT"
+        if [ -f "$d/SECURITY_GATE_FEEDBACK.md" ]; then cat "$d/SECURITY_GATE_FEEDBACK.md" >> "$GITHUB_STEP_SUMMARY"
+        elif [ -f "$d/baseline_raw.log" ]; then { echo '```'; cat "$d/baseline_raw.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"; fi
+
+    - name: Upload gate report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-gate-report-${{ github.run_id }}-${{ github.run_attempt }}
+        path: .gate-out/
+        retention-days: 30
+
+    - name: Comment feedback on PR
+      if: always() && inputs.comment-on-pr == 'true' && github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          const path = '.gate-out/SECURITY_GATE_FEEDBACK.md';
+          if (!fs.existsSync(path)) return;
+          const marker = '<!-- dt074-security-gate -->';
+          let body = marker + '\n' + fs.readFileSync(path, 'utf8');
+          if (body.length > 65000) body = body.slice(0, 65000) + '\n\n…(truncated, see the workflow artifact)';
+          const { owner, repo } = context.repo;
+          const issue_number = context.issue.number;
+          const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+          const mine = comments.find(c => c.body && c.body.startsWith(marker));
+          try {
+            if (mine) await github.rest.issues.updateComment({ owner, repo, comment_id: mine.id, body });
+            else await github.rest.issues.createComment({ owner, repo, issue_number, body });
+          } catch (e) { core.warning(`could not comment (fork PR?): ${e.message}`); }
+
+    - name: Upload SARIF to code scanning
+      if: always() && inputs.upload-sarif == 'true'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: .gate-out/findings.sarif
+        category: dt074-security-gate
+      continue-on-error: true
+
+    - name: Enforce decision
+      if: inputs.fail-on-block == 'true'
+      shell: bash
+      run: |
+        echo "Security gate decision: ${{ steps.gate.outputs.decision }}"
+        exit ${{ steps.gate.outputs.exit_code }}

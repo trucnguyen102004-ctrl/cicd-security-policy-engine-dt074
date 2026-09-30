@@ -1,0 +1,34 @@
+# Baseline "traditional" gate: full-repository scan on every commit,
+# zero tolerance (any finding from any tool fails the build), raw log output.
+version: 1
+name: baseline
+
+scope:
+  differential: false
+  include: ["**"]
+  exclude: []
+  dependency_manifests: []
+
+sast:
+  configs:
+    - "{registry}/p-java.yml"
+    - "{registry}/p-python.yml"
+    - "{registry}/p-secrets.yml"
+  zero_tolerance: true
+
+secrets:
+  block: true
+  full_history: true
+
+sca:
+  zero_tolerance: true
+
+sbom:
+  format: cyclonedx-json
+  only_on_manifest_change: false
+
+feedback:
+  markdown: null             # raw log only
+
+override:
+  enabled: false

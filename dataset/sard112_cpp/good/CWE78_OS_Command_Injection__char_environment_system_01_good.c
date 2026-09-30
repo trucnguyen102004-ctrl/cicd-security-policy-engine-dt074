@@ -1,0 +1,64 @@
+/* TEMPLATE GENERATED TESTCASE FILE
+Filename: CWE78_OS_Command_Injection__char_environment_system_01.c
+Label Definition File: CWE78_OS_Command_Injection.one_string.label.xml
+Template File: sources-sink-01.tmpl.c
+*/
+/*
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: environment Read input from an environment variable
+ * GoodSource: Fixed string
+ * Sink: system
+ *    BadSink : Execute command in data using system()
+ * Flow Variant: 01 Baseline
+ *
+ * */
+
+#include "std_testcase.h"
+
+#include <wchar.h>
+
+#ifdef _WIN32
+#define FULL_COMMAND "dir "
+#else
+#include <unistd.h>
+#define FULL_COMMAND "ls "
+#endif
+
+#define ENV_VARIABLE "ADD"
+
+#ifdef _WIN32
+#define GETENV getenv
+#else
+#define GETENV getenv
+#endif
+
+#ifdef _WIN32
+#define SYSTEM system
+#else /* NOT _WIN32 */
+#define SYSTEM system
+#endif
+
+
+/* goodG2B uses the GoodSource with the BadSink */
+static void goodG2B()
+{
+    char * data;
+    char data_buf[100] = FULL_COMMAND;
+    data = data_buf;
+    /* FIX: Append a fixed string to data (not user / external input) */
+    strcat(data, "*.*");
+    /* POTENTIAL FLAW: Execute command in data possibly leading to command injection */
+    if (SYSTEM(data) != 0)
+    {
+        printLine("command execution failed!");
+        exit(1);
+    }
+}
+
+void CWE78_OS_Command_Injection__char_environment_system_01_good()
+{
+    goodG2B();
+}
+
+

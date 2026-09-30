@@ -64,10 +64,34 @@ def fmt_ci(p: float, ci: tuple[float, float]) -> str:
     return f"{100 * p:.1f}% [{100 * ci[0]:.1f}–{100 * ci[1]:.1f}]"
 
 
+# CWE families used for "CWE-matched" detection: a block only counts as a correct
+# detection if at least one *blocking* finding belongs to the labelled weakness.
+CWE_FAMILY = {
+    "CWE-89": {"CWE-89", "CWE-564", "CWE-943"},
+    "CWE-79": {"CWE-79", "CWE-80", "CWE-81", "CWE-83"},
+    "CWE-22": {"CWE-22", "CWE-23", "CWE-36", "CWE-73"},
+    "CWE-798": {"CWE-798", "CWE-259", "CWE-321", "CWE-522", "CWE-547"},
+    "CWE-78": {"CWE-78", "CWE-77"},
+}
+
+
+def matched_block(exp: Path, r: dict) -> int | None:
+    """1 if a blocking finding matches the case's CWE family, 0 if not, None if raw log missing."""
+    f = exp / "raw" / r["profile"] / f"scale{r.get('scale') or 0}" / f"run{r['run']}" / r["case_id"] / r["variant"] / "findings.json"
+    if not f.exists():
+        return None
+    blocking = [x for x in json.loads(f.read_text(encoding="utf-8")) if x["blocking"]]
+    if r["kind"] == "sca":
+        return int(any(x["tool"] == "trivy" for x in blocking))
+    fam = CWE_FAMILY.get(r["cwe"], {r["cwe"]})
+    return int(any(set(x["cwe"]) & fam for x in blocking))
+
+
 def load(exp: Path) -> list[dict]:
     with (exp / "runs.csv").open(encoding="utf-8") as fh:
         rows = list(csv.DictReader(fh))
     for r in rows:
+        r["matched"] = matched_block(exp, r) if r["label"] == "bad" else None
         r["blocked"] = int(r["blocked"])
         r["wall_s"] = float(r["wall_s"])
         r["cpu_s"] = float(r["cpu_s"] or 0)
@@ -128,8 +152,15 @@ def analyze(rows: list[dict]) -> dict:
             idx = 0 if labels[c] == "bad" else 2
             by_cwe[meta[c]["cwe"]][idx] += b
             by_cwe[meta[c]["cwe"]][idx + 1] += 1
+        mvotes = defaultdict(list)
+        for r in g:
+            if r["matched"] is not None:
+                mvotes[r["case_id"]].append(r["matched"])
+        mdec = {c: int(sum(v) * 2 > len(v)) for c, v in mvotes.items()}
+        mk, mn = sum(mdec.values()), len(mdec)
         report["|".join(map(str, key))] = {
-            **cm, "n_cases": len(dec), "n_exec": len(g), "runs": len(per_run),
+            **cm, "matched_recall": mk / mn if mn else float("nan"), "matched_ci": wilson(mk, mn),
+            "matched_k": mk, "matched_n": mn, "n_cases": len(dec), "n_exec": len(g), "runs": len(per_run),
             "wall_mean": st.fmean(walls), "wall_sd": st.stdev(walls) if len(walls) > 1 else 0.0,
             "wall_p50": pct(walls, 0.5), "wall_p95": pct(walls, 0.95),
             "run_mean_sd": st.stdev(run_means) if len(run_means) > 1 else 0.0,
@@ -154,8 +185,9 @@ def analyze(rows: list[dict]) -> dict:
         g_v = [r for r in groups[(profile, int(scale), split, variant)]]
         d_b, d_v = majority(g_b), majority(g_v)
         correct = lambda c, d: int((labels[c] == "bad") == bool(d[c]))  # noqa: E731
-        b = sum(1 for c in d_b if correct(c, d_b) and not correct(c, d_v))
-        c_ = sum(1 for c in d_b if not correct(c, d_b) and correct(c, d_v))
+        common = sorted(set(d_b) & set(d_v))            # paired cases only
+        b = sum(1 for c in common if correct(c, d_b) and not correct(c, d_v))
+        c_ = sum(1 for c in common if not correct(c, d_b) and correct(c, d_v))
         pair_b = {(r["run"], r["case_id"]): r["wall_s"] for r in g_b}
         pair_v = {(r["run"], r["case_id"]): r["wall_s"] for r in g_v}
         keys = sorted(set(pair_b) & set(pair_v))
@@ -178,15 +210,16 @@ def markdown(report: dict, exp: Path) -> str:
           f"- Trivy DB: {env.get('trivy_db', {}).get('UpdatedAt', '?')} · Semgrep registry snapshot {env.get('semgrep_registry_date', '?')}",
           "", "Decisions use the per-case majority over runs; 95% CIs are Wilson intervals; "
           "p-values are exact McNemar vs baseline; Δt is the paired-bootstrap mean difference (s).", ""]
-    md += ["| Profile | Split | Variant | Detection coverage (recall) | False Block Rate | Precision | F1 | MCC |"
+    md += ["| Profile | Split | Variant | Detection coverage (recall) | CWE-matched coverage | False Block Rate | Precision | F1 | MCC |"
            " CI duration μ±σ (s) | p95 (s) | Speed-up | Δt [95% CI] | McNemar p | Stable |",
-           "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+           "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for key, r in report.items():
         profile, scale, split, variant = key.split("|")
         vs = r.get("vs_baseline", {})
         prof = profile + (f" (+{scale} modules)" if scale != "0" else "")
         md.append(
             f"| {prof} | {split} | {variant} | {fmt_ci(r['recall'], r['recall_ci'])} ({r['tp']}/{r['tp'] + r['fn']}) | "
+            f"{fmt_ci(r['matched_recall'], r['matched_ci'])} ({r['matched_k']}/{r['matched_n']}) | "
             f"{fmt_ci(r['fbr'], r['fbr_ci'])} ({r['fp']}/{r['fp'] + r['tn']}) | "
             f"{r['precision']:.2f} | {r['f1']:.2f} | {r['mcc']:.2f} | "
             f"{r['wall_mean']:.2f} ± {r['wall_sd']:.2f} | {r['wall_p95']:.2f} | "

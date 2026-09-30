@@ -1,0 +1,4 @@
+# Host-side analysis / report tooling (not needed by the gate itself)
+matplotlib==3.10.7
+PyYAML==6.0.3
+python-pptx==1.0.2

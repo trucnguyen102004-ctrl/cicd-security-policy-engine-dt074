@@ -427,11 +427,11 @@ def write_manifest() -> Path:
     return manifest
 
 
-def verify_manifest() -> bool:
+def verify_manifest(root: Path = DATASET) -> bool:
     ok = True
-    for line in (DATASET / "manifest.sha256").read_text().splitlines():
+    for line in (root / "manifest.sha256").read_text().splitlines():
         digest, rel = line.split("  ", 1)
-        p = DATASET / rel
+        p = root / rel
         if not p.exists() or sha256(p) != digest:
             print(f"[fixtures] MISMATCH {rel}")
             ok = False

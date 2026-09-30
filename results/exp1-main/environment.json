@@ -1,0 +1,19 @@
+{
+  "started_utc": "2026-09-30T14:43:52+00:00",
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "python": "3.12.14",
+  "cpu_count": 12,
+  "cpu_model": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+  "mem_total_kb": 8050160,
+  "tool_versions": "Version: 0.74.0\nVulnerability DB:\n  Version: 2\n  UpdatedAt: 2026-09-30 13:11:13.714761705 +0000 UTC\n  NextUpdate: 2026-10-01 13:11:13.714761431 +0000 UTC\n  DownloadedAt: 2026-09-30 14:13:19.792718788 +0000 UTC\nsemgrep 1.178.0\ngitleaks 8.30.1\nsyft 1.52.0\n",
+  "semgrep_registry_snapshot": "5e652fa9ac09c9fac36bbadc3562a0c8eed1a47438a9d1f545e021ae3c5648b1  p-java.yml\n31c1dfa46e8ddd97f9ac98c607ddd77b20a2c3356d7ec987359961d47ec27035  p-python.yml\n139b35ad3442bc83d1f0864db82fa4fdc7e1f1ee4b5ac872bfbeb604c82c6518  p-secrets.yml\n",
+  "semgrep_registry_date": "2026-09-30T14:13:08Z",
+  "trivy_db": {
+    "Version": 2,
+    "NextUpdate": "2026-10-01T13:11:13.714761431Z",
+    "UpdatedAt": "2026-09-30T13:11:13.714761705Z",
+    "DownloadedAt": "2026-09-30T14:13:19.792718788Z"
+  },
+  "dataset_manifest_sha256": "e50c0bf0d8eb9d185131c19569e1e7e26f1429c135ed9d120c4454b60db0cb05",
+  "gate_commit": "31759c07099476f09d9d86e309a2961aa6c44f79"
+}

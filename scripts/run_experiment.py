@@ -64,8 +64,8 @@ def sh(*cmd, cwd=None, check=True):
     return subprocess.run(cmd, cwd=cwd, check=check, capture_output=True, text=True)
 
 
-def load_cases(splits: list[str], only: set[str] | None) -> list[dict]:
-    with (DATASET / "labels.csv").open(encoding="utf-8") as fh:
+def load_cases(splits: list[str], only: set[str] | None, labels: str = "labels.csv") -> list[dict]:
+    with (DATASET / labels).open(encoding="utf-8") as fh:
         rows = [r for r in csv.DictReader(fh) if r["split"] in splits]
     return [r for r in rows if not only or r["case_id"] in only]
 
@@ -77,7 +77,7 @@ def place_case(case: dict, ws: Path) -> list[str]:
         dest = ws / "app" / "modules" / src.name
         shutil.copytree(src, dest)
         return [p.relative_to(ws).as_posix() for p in dest.rglob("*") if p.is_file()]
-    sub = "java/src/main/java/edu/demo" if case["lang"] == "java" else "python"
+    sub = {"java": "java/src/main/java/edu/demo", "python": "python", "c": "c/src"}[case["lang"]]
     dest = ws / "app" / sub / src.name
     dest.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, dest)
@@ -103,10 +103,10 @@ def build_workspace(case: dict, profile: str, scale: int) -> Path:
     return ws
 
 
-def write_policies(out: Path, ablation: bool) -> dict[str, Path]:
+def write_policies(out: Path, ablation: bool, policy_dir: Path) -> dict[str, Path]:
     pol_dir = out / "policies"
     pol_dir.mkdir(parents=True, exist_ok=True)
-    variants = {"baseline": ROOT / "policy" / "baseline.yml", "adaptive": ROOT / "policy" / "adaptive.yml"}
+    variants = {"baseline": policy_dir / "baseline.yml", "adaptive": policy_dir / "adaptive.yml"}
     if ablation:
         base = yaml.safe_load(variants["adaptive"].read_text(encoding="utf-8"))
         for name, (desc, mutate) in ABLATIONS.items():
@@ -188,6 +188,8 @@ def main() -> None:
     ap.add_argument("--scale", default="0", help="comma list of extra legacy modules (realistic profile)")
     ap.add_argument("--cases", default="", help="comma list of case_ids to restrict to")
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--labels", default="labels.csv", help="labels file under dataset/ (labels_cpp.csv for SARD #112)")
+    ap.add_argument("--policy-dir", type=Path, default=ROOT / "policy", help="directory with baseline.yml / adaptive.yml")
     ap.add_argument("--keep-raw", action="store_true", default=True)
     args = ap.parse_args()
 
@@ -196,10 +198,10 @@ def main() -> None:
 
     out = args.out.resolve()
     out.mkdir(parents=True, exist_ok=True)
-    variants = write_policies(out, args.ablation)
+    variants = write_policies(out, args.ablation, args.policy_dir.resolve())
     if args.variants:
         variants = {k: v for k, v in variants.items() if k in args.variants.split(",")}
-    cases = load_cases(args.splits.split(","), set(filter(None, args.cases.split(","))))
+    cases = load_cases(args.splits.split(","), set(filter(None, args.cases.split(","))), args.labels)
     scales = [int(s) for s in args.scale.split(",")]
     config = {k: (str(v) if isinstance(v, Path) else v) for k, v in vars(args).items()}
     config["variants"] = {k: str(v) for k, v in variants.items()}

@@ -26,17 +26,17 @@
     "matched_k": 25,
     "matched_n": 28,
     "n_cases": 56,
-    "n_exec": 56,
-    "runs": 1,
-    "wall_mean": 6.597339285714286,
-    "wall_sd": 1.2864545255968325,
-    "wall_p50": 5.997,
-    "wall_p95": 8.837,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.19499596274857184,
-    "cpu_mean": 6.0164285714285715,
-    "rss_max": 254.7,
-    "rss_mean": 199.23035714285714,
+    "n_exec": 168,
+    "runs": 3,
+    "wall_mean": 6.347910714285715,
+    "wall_sd": 1.1898558299945174,
+    "wall_p50": 5.749,
+    "wall_p95": 8.245,
+    "run_mean_sd": 0.24490094051119016,
+    "wall_cv": 0.18744054280990363,
+    "cpu_mean": 5.812083333333333,
+    "rss_max": 257.4,
+    "rss_mean": 199.3952380952381,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
@@ -91,12 +91,12 @@
       "mcnemar_b_only_baseline_correct": 0,
       "mcnemar_c_only_variant_correct": 9,
       "mcnemar_p": 0.00390625,
-      "wall_diff_mean": -5.719303571428571,
+      "wall_diff_mean": -5.028583333333334,
       "wall_diff_ci": [
-        -6.2624642857142865,
-        -5.200035714285714
+        -5.268505952380953,
+        -4.783785714285714
       ],
-      "speedup": 1.866910632262465
+      "speedup": 1.7921635258694977
     }
   },
   "isolated|0|all|baseline": {
@@ -126,17 +126,17 @@
     "matched_k": 18,
     "matched_n": 28,
     "n_cases": 56,
-    "n_exec": 56,
-    "runs": 1,
-    "wall_mean": 12.316642857142856,
-    "wall_sd": 1.696004035464447,
-    "wall_p50": 12.059,
-    "wall_p95": 14.449,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.1377001878787834,
-    "cpu_mean": 10.360357142857142,
-    "rss_max": 264.6,
-    "rss_mean": 249.4125,
+    "n_exec": 168,
+    "runs": 3,
+    "wall_mean": 11.376494047619047,
+    "wall_sd": 1.2437765216840608,
+    "wall_p50": 10.942,
+    "wall_p95": 13.047,
+    "run_mean_sd": 0.8351940074502338,
+    "wall_cv": 0.1093286311650967,
+    "cpu_mean": 10.054702380952381,
+    "rss_max": 267.6,
+    "rss_mean": 250.09583333333333,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
@@ -268,17 +268,17 @@
     "matched_k": 8,
     "matched_n": 11,
     "n_cases": 22,
-    "n_exec": 22,
-    "runs": 1,
-    "wall_mean": 6.0806818181818185,
-    "wall_sd": 0.5252501795166291,
-    "wall_p50": 5.829,
-    "wall_p95": 6.752,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.08638014538864391,
-    "cpu_mean": 5.5209090909090905,
+    "n_exec": 66,
+    "runs": 3,
+    "wall_mean": 5.80739393939394,
+    "wall_sd": 0.38965704363582554,
+    "wall_p50": 5.695,
+    "wall_p95": 6.594,
+    "run_mean_sd": 0.24655910701227157,
+    "wall_cv": 0.06709671286334162,
+    "cpu_mean": 5.281363636363636,
     "rss_max": 190.1,
-    "rss_mean": 188.1818181818182,
+    "rss_mean": 188.03939393939393,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
@@ -327,12 +327,12 @@
       "mcnemar_b_only_baseline_correct": 0,
       "mcnemar_c_only_variant_correct": 1,
       "mcnemar_p": 1.0,
-      "wall_diff_mean": -6.135136363636364,
+      "wall_diff_mean": -5.56769696969697,
       "wall_diff_ci": [
-        -6.5468636363636366,
-        -5.788363636363636
+        -5.766515151515151,
+        -5.391303030303031
       ],
-      "speedup": 2.008955335451317
+      "speedup": 1.9587255536306902
     }
   },
   "isolated|0|holdout|baseline": {
@@ -362,17 +362,17 @@
     "matched_k": 7,
     "matched_n": 11,
     "n_cases": 22,
-    "n_exec": 22,
-    "runs": 1,
-    "wall_mean": 12.21581818181818,
-    "wall_sd": 1.0569655414648842,
-    "wall_p50": 12.053,
-    "wall_p95": 13.531,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.08652433473822115,
-    "cpu_mean": 10.426363636363636,
-    "rss_max": 256.7,
-    "rss_mean": 248.72272727272727,
+    "n_exec": 66,
+    "runs": 3,
+    "wall_mean": 11.37509090909091,
+    "wall_sd": 0.9577066794776383,
+    "wall_p50": 10.835,
+    "wall_p95": 12.906,
+    "run_mean_sd": 0.7585822574528834,
+    "wall_cv": 0.08419332092653822,
+    "cpu_mean": 10.100454545454545,
+    "rss_max": 258.0,
+    "rss_mean": 249.1939393939394,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
@@ -450,17 +450,17 @@
     "matched_k": 17,
     "matched_n": 17,
     "n_cases": 34,
-    "n_exec": 34,
-    "runs": 1,
-    "wall_mean": 6.931647058823529,
-    "wall_sd": 1.5131442255830505,
-    "wall_p50": 6.059,
-    "wall_p95": 9.101,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.21829504773427807,
-    "cpu_mean": 6.337058823529412,
-    "rss_max": 254.7,
-    "rss_mean": 206.37941176470588,
+    "n_exec": 102,
+    "runs": 3,
+    "wall_mean": 6.697656862745098,
+    "wall_sd": 1.3887915788223524,
+    "wall_p50": 5.967,
+    "wall_p95": 9.637,
+    "run_mean_sd": 0.24937273614817104,
+    "wall_cv": 0.20735484174283947,
+    "cpu_mean": 6.155490196078431,
+    "rss_max": 257.4,
+    "rss_mean": 206.74313725490197,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
@@ -499,12 +499,12 @@
       "mcnemar_b_only_baseline_correct": 0,
       "mcnemar_c_only_variant_correct": 8,
       "mcnemar_p": 0.0078125,
-      "wall_diff_mean": -5.450235294117647,
+      "wall_diff_mean": -4.6797450980392155,
       "wall_diff_ci": [
-        -6.3494117647058825,
-        -4.644764705882353
+        -5.0526470588235295,
+        -4.314284313725491
       ],
-      "speedup": 1.7862828629134915
+      "speedup": 1.6987137731808462
     }
   },
   "isolated|0|main|baseline": {
@@ -534,17 +534,17 @@
     "matched_k": 11,
     "matched_n": 17,
     "n_cases": 34,
-    "n_exec": 34,
-    "runs": 1,
-    "wall_mean": 12.381882352941176,
-    "wall_sd": 2.017909055293801,
-    "wall_p50": 11.724,
-    "wall_p95": 14.449,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.1629727207684597,
-    "cpu_mean": 10.31764705882353,
-    "rss_max": 264.6,
-    "rss_mean": 249.85882352941178,
+    "n_exec": 102,
+    "runs": 3,
+    "wall_mean": 11.377401960784313,
+    "wall_sd": 1.402710659139455,
+    "wall_p50": 10.942,
+    "wall_p95": 13.545,
+    "run_mean_sd": 0.8861276056563991,
+    "wall_cv": 0.12328918886528974,
+    "cpu_mean": 10.025098039215687,
+    "rss_max": 267.6,
+    "rss_mean": 250.67941176470586,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
@@ -630,59 +630,87 @@
     ]
   },
   "realistic|0|all|adaptive": {
-    "tp": 2,
-    "fn": 1,
+    "tp": 25,
+    "fn": 3,
     "fp": 0,
-    "tn": 0,
-    "recall": 0.6666666666666666,
+    "tn": 28,
+    "recall": 0.8928571428571429,
     "recall_ci": [
-      0.2076595988078242,
-      0.9385080559790691
+      0.7280414829086315,
+      0.962881633460356
     ],
-    "fbr": NaN,
+    "fbr": 0.0,
     "fbr_ci": [
-      NaN,
-      NaN
+      0.0,
+      0.12064330643947074
     ],
     "precision": 1.0,
-    "f1": 0.8,
-    "mcc": 0.0,
-    "balanced_acc": NaN,
-    "matched_recall": 0.6666666666666666,
+    "f1": 0.9433962264150945,
+    "mcc": 0.8980265101338745,
+    "balanced_acc": 0.9464285714285714,
+    "matched_recall": 0.8928571428571429,
     "matched_ci": [
-      0.2076595988078242,
-      0.9385080559790691
+      0.7280414829086315,
+      0.962881633460356
     ],
-    "matched_k": 2,
-    "matched_n": 3,
-    "n_cases": 3,
-    "n_exec": 3,
-    "runs": 1,
-    "wall_mean": 6.019000000000001,
-    "wall_sd": 0.22627196026021434,
-    "wall_p50": 5.949,
-    "wall_p95": 6.272,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.037592949038081795,
-    "cpu_mean": 5.489999999999999,
-    "rss_max": 188.8,
-    "rss_mean": 188.1,
+    "matched_k": 25,
+    "matched_n": 28,
+    "n_cases": 56,
+    "n_exec": 168,
+    "runs": 3,
+    "wall_mean": 6.230369047619048,
+    "wall_sd": 1.0988649427429682,
+    "wall_p50": 5.688,
+    "wall_p95": 8.096,
+    "run_mean_sd": 0.15885575612564878,
+    "wall_cv": 0.1763723680482302,
+    "cpu_mean": 5.704940476190476,
+    "rss_max": 256.9,
+    "rss_mean": 198.81785714285715,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
-        1,
-        2,
+        6,
+        7,
         0,
-        0
+        7
       ],
       "CWE-798": [
-        1,
-        1,
+        5,
+        5,
         0,
-        0
+        5
+      ],
+      "CWE-79": [
+        5,
+        6,
+        0,
+        6
+      ],
+      "CWE-89": [
+        7,
+        8,
+        0,
+        8
+      ],
+      "CWE-1395": [
+        2,
+        2,
+        0,
+        2
       ]
     },
     "errors": [
+      {
+        "case": "H02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "H06-bad",
+        "type": "FN",
+        "rules": []
+      },
       {
         "case": "H09-bad",
         "type": "FN",
@@ -690,246 +718,801 @@
       }
     ],
     "vs_baseline": {
-      "mcnemar_b_only_baseline_correct": 0,
-      "mcnemar_c_only_variant_correct": 0,
-      "mcnemar_p": 1.0,
-      "wall_diff_mean": -5.298,
+      "mcnemar_b_only_baseline_correct": 3,
+      "mcnemar_c_only_variant_correct": 28,
+      "mcnemar_p": 4.649162292480469e-06,
+      "wall_diff_mean": -4.862238095238095,
       "wall_diff_ci": [
-        -5.3309999999999995,
-        -5.265000000000001
+        -5.047345238095238,
+        -4.6567678571428575
       ],
-      "speedup": 1.8954145206844988
+      "speedup": 1.7804093237616818
     }
   },
   "realistic|0|all|baseline": {
-    "tp": 2,
+    "tp": 28,
     "fn": 0,
-    "fp": 0,
+    "fp": 28,
     "tn": 0,
     "recall": 1.0,
     "recall_ci": [
-      0.3423802239546494,
+      0.8793566935605293,
       1.0
     ],
-    "fbr": NaN,
+    "fbr": 1.0,
     "fbr_ci": [
-      NaN,
-      NaN
+      0.8793566935605293,
+      1.0
     ],
-    "precision": 1.0,
-    "f1": 1.0,
+    "precision": 0.5,
+    "f1": 0.6666666666666666,
     "mcc": 0.0,
-    "balanced_acc": NaN,
-    "matched_recall": 0.5,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.6785714285714286,
     "matched_ci": [
-      0.09453120463920084,
-      0.9054687953607992
+      0.4933884303549963,
+      0.8206675316309071
     ],
-    "matched_k": 1,
-    "matched_n": 2,
-    "n_cases": 2,
-    "n_exec": 2,
-    "runs": 1,
-    "wall_mean": 11.4085,
-    "wall_sd": 0.27506453788156654,
-    "wall_p50": 11.214,
-    "wall_p95": 11.603,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.024110491114657188,
-    "cpu_mean": 10.46,
-    "rss_max": 283.4,
-    "rss_mean": 269.04999999999995,
+    "matched_k": 19,
+    "matched_n": 28,
+    "n_cases": 56,
+    "n_exec": 168,
+    "runs": 3,
+    "wall_mean": 11.092607142857142,
+    "wall_sd": 0.7240818678339622,
+    "wall_p50": 10.818,
+    "wall_p95": 12.37,
+    "run_mean_sd": 0.45332974403184734,
+    "wall_cv": 0.06527607608462181,
+    "cpu_mean": 10.153511904761904,
+    "rss_max": 283.6,
+    "rss_mean": 266.6559523809524,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
-        1,
-        1,
+        7,
+        7,
+        7,
+        7
+      ],
+      "CWE-798": [
+        5,
+        5,
+        5,
+        5
+      ],
+      "CWE-79": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "CWE-89": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "CWE-1395": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    "errors": [
+      {
+        "case": "H01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H05-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H06-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H07-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H08-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H09-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H10-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H11-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J05-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J06-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J07-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J08-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J09-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J10-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J11-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format;use-of-default-aes"
+        ]
+      },
+      {
+        "case": "P01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "P02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "P03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;path-traversal-open;raw-html-format"
+        ]
+      },
+      {
+        "case": "P04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "S03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "S04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-34477;CVE-2026-34478;CVE-2026-34480;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      }
+    ]
+  },
+  "realistic|0|holdout|adaptive": {
+    "tp": 8,
+    "fn": 3,
+    "fp": 0,
+    "tn": 11,
+    "recall": 0.7272727272727273,
+    "recall_ci": [
+      0.4343546966810743,
+      0.9025394078669138
+    ],
+    "fbr": 0.0,
+    "fbr_ci": [
+      0.0,
+      0.25883296999442634
+    ],
+    "precision": 1.0,
+    "f1": 0.8421052631578948,
+    "mcc": 0.7559289460184545,
+    "balanced_acc": 0.8636363636363636,
+    "matched_recall": 0.7272727272727273,
+    "matched_ci": [
+      0.4343546966810743,
+      0.9025394078669138
+    ],
+    "matched_k": 8,
+    "matched_n": 11,
+    "n_cases": 22,
+    "n_exec": 66,
+    "runs": 3,
+    "wall_mean": 5.704878787878788,
+    "wall_sd": 0.18238720562005656,
+    "wall_p50": 5.67,
+    "wall_p95": 5.983,
+    "run_mean_sd": 0.09569910590242402,
+    "wall_cv": 0.0319703910287413,
+    "cpu_mean": 5.201363636363637,
+    "rss_max": 190.5,
+    "rss_mean": 188.03939393939393,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-22": [
+        2,
+        3,
         0,
-        0
+        3
+      ],
+      "CWE-79": [
+        2,
+        3,
+        0,
+        3
+      ],
+      "CWE-89": [
+        3,
+        4,
+        0,
+        4
       ],
       "CWE-798": [
         1,
         1,
         0,
-        0
-      ]
-    },
-    "errors": []
-  },
-  "realistic|0|holdout|adaptive": {
-    "tp": 0,
-    "fn": 1,
-    "fp": 0,
-    "tn": 0,
-    "recall": 0.0,
-    "recall_ci": [
-      0.0,
-      0.7934506882081973
-    ],
-    "fbr": NaN,
-    "fbr_ci": [
-      NaN,
-      NaN
-    ],
-    "precision": NaN,
-    "f1": 0.0,
-    "mcc": 0.0,
-    "balanced_acc": NaN,
-    "matched_recall": 0.0,
-    "matched_ci": [
-      0.0,
-      0.7934506882081973
-    ],
-    "matched_k": 0,
-    "matched_n": 1,
-    "n_cases": 1,
-    "n_exec": 1,
-    "runs": 1,
-    "wall_mean": 5.836,
-    "wall_sd": 0.0,
-    "wall_p50": 5.836,
-    "wall_p95": 5.836,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.0,
-    "cpu_mean": 5.26,
-    "rss_max": 187.6,
-    "rss_mean": 187.6,
-    "decision_stability": 1.0,
-    "by_cwe": {
-      "CWE-22": [
-        0,
-        1,
-        0,
-        0
+        1
       ]
     },
     "errors": [
+      {
+        "case": "H02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "H06-bad",
+        "type": "FN",
+        "rules": []
+      },
       {
         "case": "H09-bad",
         "type": "FN",
         "rules": []
       }
-    ]
+    ],
+    "vs_baseline": {
+      "mcnemar_b_only_baseline_correct": 3,
+      "mcnemar_c_only_variant_correct": 11,
+      "mcnemar_p": 0.057373046875,
+      "wall_diff_mean": -5.414833333333334,
+      "wall_diff_ci": [
+        -5.577424242424243,
+        -5.275257575757576
+      ],
+      "speedup": 1.9491583493129219
+    }
   },
-  "realistic|0|main|adaptive": {
-    "tp": 2,
+  "realistic|0|holdout|baseline": {
+    "tp": 11,
     "fn": 0,
-    "fp": 0,
+    "fp": 11,
     "tn": 0,
     "recall": 1.0,
     "recall_ci": [
-      0.3423802239546494,
+      0.7411670300055737,
       1.0
     ],
-    "fbr": NaN,
+    "fbr": 1.0,
     "fbr_ci": [
-      NaN,
-      NaN
-    ],
-    "precision": 1.0,
-    "f1": 1.0,
-    "mcc": 0.0,
-    "balanced_acc": NaN,
-    "matched_recall": 1.0,
-    "matched_ci": [
-      0.3423802239546494,
+      0.7411670300055737,
       1.0
     ],
-    "matched_k": 2,
-    "matched_n": 2,
-    "n_cases": 2,
-    "n_exec": 2,
-    "runs": 1,
-    "wall_mean": 6.1105,
-    "wall_sd": 0.22839549032325512,
-    "wall_p50": 5.949,
-    "wall_p95": 6.272,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.037377545261967945,
-    "cpu_mean": 5.605,
-    "rss_max": 188.8,
-    "rss_mean": 188.35000000000002,
+    "precision": 0.5,
+    "f1": 0.6666666666666666,
+    "mcc": 0.0,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.7272727272727273,
+    "matched_ci": [
+      0.4343546966810743,
+      0.9025394078669138
+    ],
+    "matched_k": 8,
+    "matched_n": 11,
+    "n_cases": 22,
+    "n_exec": 66,
+    "runs": 3,
+    "wall_mean": 11.119712121212121,
+    "wall_sd": 0.7035077773371754,
+    "wall_p50": 10.876,
+    "wall_p95": 12.418,
+    "run_mean_sd": 0.40436267917370816,
+    "wall_cv": 0.06326672576308463,
+    "cpu_mean": 10.205454545454545,
+    "rss_max": 282.2,
+    "rss_mean": 264.75,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
-        1,
-        1,
-        0,
-        0
+        3,
+        3,
+        3,
+        3
+      ],
+      "CWE-79": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "CWE-89": [
+        4,
+        4,
+        4,
+        4
       ],
       "CWE-798": [
         1,
         1,
+        1,
+        1
+      ]
+    },
+    "errors": [
+      {
+        "case": "H01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H05-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H06-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H07-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H08-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H09-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H10-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "H11-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      }
+    ]
+  },
+  "realistic|0|main|adaptive": {
+    "tp": 17,
+    "fn": 0,
+    "fp": 0,
+    "tn": 17,
+    "recall": 1.0,
+    "recall_ci": [
+      0.8156818626193445,
+      1.0
+    ],
+    "fbr": 0.0,
+    "fbr_ci": [
+      0.0,
+      0.18431813738065556
+    ],
+    "precision": 1.0,
+    "f1": 1.0,
+    "mcc": 1.0,
+    "balanced_acc": 1.0,
+    "matched_recall": 1.0,
+    "matched_ci": [
+      0.8156818626193445,
+      1.0
+    ],
+    "matched_k": 17,
+    "matched_n": 17,
+    "n_cases": 34,
+    "n_exec": 102,
+    "runs": 3,
+    "wall_mean": 6.570392156862746,
+    "wall_sd": 1.2953569801705205,
+    "wall_p50": 5.729,
+    "wall_p95": 9.688,
+    "run_mean_sd": 0.2004445434384109,
+    "wall_cv": 0.1971506341242548,
+    "cpu_mean": 6.03078431372549,
+    "rss_max": 256.9,
+    "rss_mean": 205.7921568627451,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-22": [
+        4,
+        4,
         0,
-        0
+        4
+      ],
+      "CWE-798": [
+        4,
+        4,
+        0,
+        4
+      ],
+      "CWE-79": [
+        3,
+        3,
+        0,
+        3
+      ],
+      "CWE-89": [
+        4,
+        4,
+        0,
+        4
+      ],
+      "CWE-1395": [
+        2,
+        2,
+        0,
+        2
       ]
     },
     "errors": [],
     "vs_baseline": {
       "mcnemar_b_only_baseline_correct": 0,
-      "mcnemar_c_only_variant_correct": 0,
-      "mcnemar_p": 1.0,
-      "wall_diff_mean": -5.298,
+      "mcnemar_c_only_variant_correct": 17,
+      "mcnemar_p": 1.52587890625e-05,
+      "wall_diff_mean": -4.504676470588235,
       "wall_diff_ci": [
-        -5.3309999999999995,
-        -5.265000000000001
+        -4.788343137254902,
+        -4.205147058823529
       ],
-      "speedup": 1.8670321577612308
+      "speedup": 1.6856023754812137
     }
   },
   "realistic|0|main|baseline": {
-    "tp": 2,
+    "tp": 17,
     "fn": 0,
-    "fp": 0,
+    "fp": 17,
     "tn": 0,
     "recall": 1.0,
     "recall_ci": [
-      0.3423802239546494,
+      0.8156818626193445,
       1.0
     ],
-    "fbr": NaN,
+    "fbr": 1.0,
     "fbr_ci": [
-      NaN,
-      NaN
+      0.8156818626193445,
+      1.0
     ],
-    "precision": 1.0,
-    "f1": 1.0,
+    "precision": 0.5,
+    "f1": 0.6666666666666666,
     "mcc": 0.0,
-    "balanced_acc": NaN,
-    "matched_recall": 0.5,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.6470588235294118,
     "matched_ci": [
-      0.09453120463920084,
-      0.9054687953607992
+      0.4130036331490377,
+      0.8269027970331224
     ],
-    "matched_k": 1,
-    "matched_n": 2,
-    "n_cases": 2,
-    "n_exec": 2,
-    "runs": 1,
-    "wall_mean": 11.4085,
-    "wall_sd": 0.27506453788156654,
-    "wall_p50": 11.214,
-    "wall_p95": 11.603,
-    "run_mean_sd": 0.0,
-    "wall_cv": 0.024110491114657188,
-    "cpu_mean": 10.46,
-    "rss_max": 283.4,
-    "rss_mean": 269.04999999999995,
+    "matched_k": 11,
+    "matched_n": 17,
+    "n_cases": 34,
+    "n_exec": 102,
+    "runs": 3,
+    "wall_mean": 11.07506862745098,
+    "wall_sd": 0.7399981169337015,
+    "wall_p50": 10.777,
+    "wall_p95": 12.332,
+    "run_mean_sd": 0.4875721278673804,
+    "wall_cv": 0.06681657169144047,
+    "cpu_mean": 10.119901960784313,
+    "rss_max": 283.6,
+    "rss_mean": 267.8892156862745,
     "decision_stability": 1.0,
     "by_cwe": {
       "CWE-22": [
-        1,
-        1,
-        0,
-        0
+        4,
+        4,
+        4,
+        4
       ],
       "CWE-798": [
-        1,
-        1,
-        0,
-        0
+        4,
+        4,
+        4,
+        4
+      ],
+      "CWE-79": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "CWE-89": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "CWE-1395": [
+        2,
+        2,
+        2,
+        2
       ]
     },
-    "errors": []
+    "errors": [
+      {
+        "case": "J01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J05-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J06-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J07-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J08-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J09-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J10-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "J11-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format;use-of-default-aes"
+        ]
+      },
+      {
+        "case": "P01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "P02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "P03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;path-traversal-open;raw-html-format"
+        ]
+      },
+      {
+        "case": "P04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "S03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "S04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-34477;CVE-2026-34478;CVE-2026-34480;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      }
+    ]
   }
 }

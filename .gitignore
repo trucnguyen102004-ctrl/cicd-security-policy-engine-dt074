@@ -1,0 +1,9 @@
+# local caches / downloaded third-party material
+.cache/
+rules/registry/
+.gate-out/
+__pycache__/
+*.pyc
+# large raw experiment logs are published as results/<exp>/raw.tar.gz
+results/*/raw/
+results/pilot/

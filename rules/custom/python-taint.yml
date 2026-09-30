@@ -1,0 +1,113 @@
+# DT074 custom taint rules for Python web code (Flask / Django).
+# Same two-tier source model as the Java rules.
+rules:
+  # ------------------------------------------------------------------ CWE-89
+  - id: dt074.python.sqli.tainted-dbapi
+    mode: taint
+    languages: [python]
+    severity: ERROR
+    message: >-
+      Untrusted request data reaches a DB-API query string. Pass values as
+      parameters: cur.execute("... WHERE name = ?", (name,)).
+    metadata:
+      cwe: ["CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"]
+      owasp: ["A03:2021 - Injection"]
+      category: security
+      subcategory: [vuln]
+      confidence: HIGH
+      likelihood: HIGH
+      impact: HIGH
+      remediation_key: CWE-89
+    pattern-sources: &pysrc
+      - pattern-either:
+          - pattern: flask.request.$ATTR
+          - pattern: request.$ATTR.get(...)
+          - pattern: request.$ATTR[...]
+          - pattern: request.GET
+          - pattern: request.POST
+    pattern-sinks:
+      - patterns:
+          - pattern-either:
+              - pattern: $CUR.execute($Q, ...)
+              - pattern: $CUR.executemany($Q, ...)
+              - pattern: $CUR.executescript($Q)
+              - pattern: sqlalchemy.text($Q)
+          - focus-metavariable: $Q
+
+  # ------------------------------------------------------------------ CWE-79
+  - id: dt074.python.xss.tainted-flask-response
+    mode: taint
+    languages: [python]
+    severity: ERROR
+    message: >-
+      Untrusted request data is returned as HTML without encoding. Use
+      markupsafe.escape() or render a Jinja2 template with autoescaping.
+    metadata:
+      cwe: ["CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"]
+      owasp: ["A03:2021 - Injection"]
+      category: security
+      subcategory: [vuln]
+      confidence: HIGH
+      likelihood: HIGH
+      impact: MEDIUM
+      remediation_key: CWE-79
+    pattern-sources: *pysrc
+    pattern-sinks:
+      - patterns:
+          - pattern-either:
+              - pattern: flask.make_response($X, ...)
+              - pattern: flask.Response($X, ...)
+              - patterns:
+                  - pattern-inside: |
+                      @$APP.route(...)
+                      def $FN(...):
+                        ...
+                  - pattern: return $X
+          - focus-metavariable: $X
+    pattern-sanitizers:
+      - pattern-either:
+          - pattern: markupsafe.escape(...)
+          - pattern: flask.escape(...)
+          - pattern: html.escape(...)
+          - pattern: bleach.clean(...)
+          - pattern: flask.jsonify(...)
+          - pattern: flask.render_template(...)
+          # File contents are not reflected request data (stored XSS is out of
+          # scope for this rule); stop taint at the file handle.
+          - pattern: open(...)
+          - pattern: io.open(...)
+
+  # ------------------------------------------------------------------ CWE-22
+  - id: dt074.python.path.tainted-open
+    mode: taint
+    languages: [python]
+    severity: ERROR
+    message: >-
+      Untrusted request data controls a filesystem path. Reduce it to a bare
+      file name with werkzeug.utils.secure_filename() or use flask.safe_join().
+    metadata:
+      cwe: ["CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"]
+      owasp: ["A01:2021 - Broken Access Control"]
+      category: security
+      subcategory: [vuln]
+      confidence: HIGH
+      likelihood: HIGH
+      impact: HIGH
+      remediation_key: CWE-22
+    pattern-sources: *pysrc
+    pattern-sinks:
+      - patterns:
+          - pattern-either:
+              - pattern: open($P, ...)
+              - pattern: io.open($P, ...)
+              - pattern: os.open($P, ...)
+              - pattern: flask.send_file($P, ...)
+              - pattern: pathlib.Path($P, ...)
+              - pattern: os.remove($P)
+          - focus-metavariable: $P
+    pattern-sanitizers:
+      - pattern-either:
+          - pattern: werkzeug.utils.secure_filename(...)
+          - pattern: werkzeug.security.safe_join(...)
+          - pattern: flask.safe_join(...)
+          - pattern: os.path.basename(...)

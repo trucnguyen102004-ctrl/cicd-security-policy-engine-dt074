@@ -1,0 +1,57 @@
+case_id,pair,label,cwe,lang,kind,split,origin,path
+J01-bad,J01,bad,CWE-89,java,sast,main,SARD#111:CWE89_SQL_Injection/s02/CWE89_SQL_Injection__getParameter_Servlet_executeQuery_01.java,sard_samples/bad/java/CWE89_SQL_Injection__getParameter_Servlet_executeQuery_01_bad.java
+J01-good,J01,good,CWE-89,java,sast,main,SARD#111:CWE89_SQL_Injection/s02/CWE89_SQL_Injection__getParameter_Servlet_executeQuery_01.java,sard_samples/good/java/CWE89_SQL_Injection__getParameter_Servlet_executeQuery_01_good.java
+J02-bad,J02,bad,CWE-89,java,sast,main,SARD#111:CWE89_SQL_Injection/s02/CWE89_SQL_Injection__getCookies_Servlet_executeUpdate_01.java,sard_samples/bad/java/CWE89_SQL_Injection__getCookies_Servlet_executeUpdate_01_bad.java
+J02-good,J02,good,CWE-89,java,sast,main,SARD#111:CWE89_SQL_Injection/s02/CWE89_SQL_Injection__getCookies_Servlet_executeUpdate_01.java,sard_samples/good/java/CWE89_SQL_Injection__getCookies_Servlet_executeUpdate_01_good.java
+J03-bad,J03,bad,CWE-89,java,sast,main,SARD#111:CWE89_SQL_Injection/s02/CWE89_SQL_Injection__Environment_execute_01.java,sard_samples/bad/java/CWE89_SQL_Injection__Environment_execute_01_bad.java
+J03-good,J03,good,CWE-89,java,sast,main,SARD#111:CWE89_SQL_Injection/s02/CWE89_SQL_Injection__Environment_execute_01.java,sard_samples/good/java/CWE89_SQL_Injection__Environment_execute_01_good.java
+J04-bad,J04,bad,CWE-79,java,sast,main,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getParameter_Servlet_01.java,sard_samples/bad/java/CWE80_XSS__Servlet_getParameter_Servlet_01_bad.java
+J04-good,J04,good,CWE-79,java,sast,main,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getParameter_Servlet_01.java,sard_samples/good/java/CWE80_XSS__Servlet_getParameter_Servlet_01_good.java
+J05-bad,J05,bad,CWE-79,java,sast,main,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getCookies_Servlet_01.java,sard_samples/bad/java/CWE80_XSS__Servlet_getCookies_Servlet_01_bad.java
+J05-good,J05,good,CWE-79,java,sast,main,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getCookies_Servlet_01.java,sard_samples/good/java/CWE80_XSS__Servlet_getCookies_Servlet_01_good.java
+J06-bad,J06,bad,CWE-22,java,sast,main,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__getParameter_Servlet_01.java,sard_samples/bad/java/CWE23_Relative_Path_Traversal__getParameter_Servlet_01_bad.java
+J06-good,J06,good,CWE-22,java,sast,main,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__getParameter_Servlet_01.java,sard_samples/good/java/CWE23_Relative_Path_Traversal__getParameter_Servlet_01_good.java
+J07-bad,J07,bad,CWE-22,java,sast,main,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__Environment_01.java,sard_samples/bad/java/CWE23_Relative_Path_Traversal__Environment_01_bad.java
+J07-good,J07,good,CWE-22,java,sast,main,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__Environment_01.java,sard_samples/good/java/CWE23_Relative_Path_Traversal__Environment_01_good.java
+J08-bad,J08,bad,CWE-22,java,sast,main,SARD#111:CWE36_Absolute_Path_Traversal/CWE36_Absolute_Path_Traversal__getQueryString_Servlet_01.java,sard_samples/bad/java/CWE36_Absolute_Path_Traversal__getQueryString_Servlet_01_bad.java
+J08-good,J08,good,CWE-22,java,sast,main,SARD#111:CWE36_Absolute_Path_Traversal/CWE36_Absolute_Path_Traversal__getQueryString_Servlet_01.java,sard_samples/good/java/CWE36_Absolute_Path_Traversal__getQueryString_Servlet_01_good.java
+J09-bad,J09,bad,CWE-798,java,sast,main,SARD#111:CWE259_Hard_Coded_Password/CWE259_Hard_Coded_Password__driverManager_01.java,sard_samples/bad/java/CWE259_Hard_Coded_Password__driverManager_01_bad.java
+J09-good,J09,good,CWE-798,java,sast,main,SARD#111:CWE259_Hard_Coded_Password/CWE259_Hard_Coded_Password__driverManager_01.java,sard_samples/good/java/CWE259_Hard_Coded_Password__driverManager_01_good.java
+J10-bad,J10,bad,CWE-798,java,sast,main,SARD#111:CWE259_Hard_Coded_Password/CWE259_Hard_Coded_Password__passwordAuth_01.java,sard_samples/bad/java/CWE259_Hard_Coded_Password__passwordAuth_01_bad.java
+J10-good,J10,good,CWE-798,java,sast,main,SARD#111:CWE259_Hard_Coded_Password/CWE259_Hard_Coded_Password__passwordAuth_01.java,sard_samples/good/java/CWE259_Hard_Coded_Password__passwordAuth_01_good.java
+J11-bad,J11,bad,CWE-798,java,sast,main,SARD#111:CWE321_Hard_Coded_Cryptographic_Key/CWE321_Hard_Coded_Cryptographic_Key__basic_01.java,sard_samples/bad/java/CWE321_Hard_Coded_Cryptographic_Key__basic_01_bad.java
+J11-good,J11,good,CWE-798,java,sast,main,SARD#111:CWE321_Hard_Coded_Cryptographic_Key/CWE321_Hard_Coded_Cryptographic_Key__basic_01.java,sard_samples/good/java/CWE321_Hard_Coded_Cryptographic_Key__basic_01_good.java
+H01-bad,H01,bad,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_02.java,holdout_samples/bad/java/CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_02_bad.java
+H01-good,H01,good,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_02.java,holdout_samples/good/java/CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_02_good.java
+H02-bad,H02,bad,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__PropertiesFile_executeQuery_02.java,holdout_samples/bad/java/CWE89_SQL_Injection__PropertiesFile_executeQuery_02_bad.java
+H02-good,H02,good,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__PropertiesFile_executeQuery_02.java,holdout_samples/good/java/CWE89_SQL_Injection__PropertiesFile_executeQuery_02_good.java
+H03-bad,H03,bad,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__getParameter_Servlet_prepareStatement_02.java,holdout_samples/bad/java/CWE89_SQL_Injection__getParameter_Servlet_prepareStatement_02_bad.java
+H03-good,H03,good,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__getParameter_Servlet_prepareStatement_02.java,holdout_samples/good/java/CWE89_SQL_Injection__getParameter_Servlet_prepareStatement_02_good.java
+H04-bad,H04,bad,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_03.java,holdout_samples/bad/java/CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_03_bad.java
+H04-good,H04,good,CWE-89,java,sast,holdout,SARD#111:CWE89_SQL_Injection/s03/CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_03.java,holdout_samples/good/java/CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_03_good.java
+H05-bad,H05,bad,CWE-79,java,sast,holdout,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getQueryString_Servlet_02.java,holdout_samples/bad/java/CWE80_XSS__Servlet_getQueryString_Servlet_02_bad.java
+H05-good,H05,good,CWE-79,java,sast,holdout,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getQueryString_Servlet_02.java,holdout_samples/good/java/CWE80_XSS__Servlet_getQueryString_Servlet_02_good.java
+H06-bad,H06,bad,CWE-79,java,sast,holdout,SARD#111:CWE80_XSS/s02/CWE80_XSS__Servlet_URLConnection_02.java,holdout_samples/bad/java/CWE80_XSS__Servlet_URLConnection_02_bad.java
+H06-good,H06,good,CWE-79,java,sast,holdout,SARD#111:CWE80_XSS/s02/CWE80_XSS__Servlet_URLConnection_02.java,holdout_samples/good/java/CWE80_XSS__Servlet_URLConnection_02_good.java
+H07-bad,H07,bad,CWE-79,java,sast,holdout,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getParameter_Servlet_03.java,holdout_samples/bad/java/CWE80_XSS__Servlet_getParameter_Servlet_03_bad.java
+H07-good,H07,good,CWE-79,java,sast,holdout,SARD#111:CWE80_XSS/s01/CWE80_XSS__Servlet_getParameter_Servlet_03.java,holdout_samples/good/java/CWE80_XSS__Servlet_getParameter_Servlet_03_good.java
+H08-bad,H08,bad,CWE-22,java,sast,holdout,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__getCookies_Servlet_02.java,holdout_samples/bad/java/CWE23_Relative_Path_Traversal__getCookies_Servlet_02_bad.java
+H08-good,H08,good,CWE-22,java,sast,holdout,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__getCookies_Servlet_02.java,holdout_samples/good/java/CWE23_Relative_Path_Traversal__getCookies_Servlet_02_good.java
+H09-bad,H09,bad,CWE-22,java,sast,holdout,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__Property_02.java,holdout_samples/bad/java/CWE23_Relative_Path_Traversal__Property_02_bad.java
+H09-good,H09,good,CWE-22,java,sast,holdout,SARD#111:CWE23_Relative_Path_Traversal/CWE23_Relative_Path_Traversal__Property_02.java,holdout_samples/good/java/CWE23_Relative_Path_Traversal__Property_02_good.java
+H10-bad,H10,bad,CWE-22,java,sast,holdout,SARD#111:CWE36_Absolute_Path_Traversal/CWE36_Absolute_Path_Traversal__getParameter_Servlet_02.java,holdout_samples/bad/java/CWE36_Absolute_Path_Traversal__getParameter_Servlet_02_bad.java
+H10-good,H10,good,CWE-22,java,sast,holdout,SARD#111:CWE36_Absolute_Path_Traversal/CWE36_Absolute_Path_Traversal__getParameter_Servlet_02.java,holdout_samples/good/java/CWE36_Absolute_Path_Traversal__getParameter_Servlet_02_good.java
+H11-bad,H11,bad,CWE-798,java,sast,holdout,SARD#111:CWE259_Hard_Coded_Password/CWE259_Hard_Coded_Password__kerberosKey_01.java,holdout_samples/bad/java/CWE259_Hard_Coded_Password__kerberosKey_01_bad.java
+H11-good,H11,good,CWE-798,java,sast,holdout,SARD#111:CWE259_Hard_Coded_Password/CWE259_Hard_Coded_Password__kerberosKey_01.java,holdout_samples/good/java/CWE259_Hard_Coded_Password__kerberosKey_01_good.java
+P01-bad,P01,bad,CWE-89,python,sast,main,SARD-derived (Juliet template),sard_samples/bad/python/CWE89_SQL_Injection__flask_args_execute_01_bad.py
+P01-good,P01,good,CWE-89,python,sast,main,SARD-derived (Juliet template),sard_samples/good/python/CWE89_SQL_Injection__flask_args_execute_01_good.py
+P02-bad,P02,bad,CWE-79,python,sast,main,SARD-derived (Juliet template),sard_samples/bad/python/CWE79_XSS__flask_args_response_01_bad.py
+P02-good,P02,good,CWE-79,python,sast,main,SARD-derived (Juliet template),sard_samples/good/python/CWE79_XSS__flask_args_response_01_good.py
+P03-bad,P03,bad,CWE-22,python,sast,main,SARD-derived (Juliet template),sard_samples/bad/python/CWE22_Path_Traversal__flask_args_open_01_bad.py
+P03-good,P03,good,CWE-22,python,sast,main,SARD-derived (Juliet template),sard_samples/good/python/CWE22_Path_Traversal__flask_args_open_01_good.py
+P04-bad,P04,bad,CWE-798,python,sast,main,SARD-derived (Juliet template),sard_samples/bad/python/CWE798_Hard_Coded_Credentials__jwt_secret_01_bad.py
+P04-good,P04,good,CWE-798,python,sast,main,SARD-derived (Juliet template),sard_samples/good/python/CWE798_Hard_Coded_Credentials__jwt_secret_01_good.py
+S01-bad,S01,bad,CWE-1395,python,sca,main,synthetic dependency PR,sca_cases/bad/S01_pyyaml_5.3.1_fullloader
+S02-bad,S02,bad,CWE-1395,java,sca,main,synthetic dependency PR,sca_cases/bad/S02_log4j_core_2.14.1
+S03-good,S03,good,CWE-1395,python,sca,main,synthetic dependency PR,sca_cases/good/S03_pyyaml_6.0.3_safe_load
+S04-good,S04,good,CWE-1395,java,sca,main,synthetic dependency PR,sca_cases/good/S04_log4j_core_2.25.3

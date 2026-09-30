@@ -1,0 +1,117 @@
+# In-context remediation knowledge base used by SECURITY_GATE_FEEDBACK.md.
+# Keys are canonical CWE ids; `aliases` folds child CWEs into their parent.
+aliases:
+  CWE-80: CWE-79
+  CWE-81: CWE-79
+  CWE-83: CWE-79
+  CWE-23: CWE-22
+  CWE-36: CWE-22
+  CWE-73: CWE-22
+  CWE-259: CWE-798
+  CWE-321: CWE-798
+  CWE-522: CWE-798
+  CWE-547: CWE-798
+  CWE-1104: CWE-1395
+  CWE-937: CWE-1395
+
+entries:
+  CWE-89:
+    title: SQL Injection
+    why: Attacker-controlled text is concatenated into an SQL statement, so it can change the query's meaning (read/modify/delete any row).
+    fix:
+      java: |
+        // Bind the value; never concatenate it into the SQL text.
+        try (PreparedStatement ps = conn.prepareStatement(
+                "select * from users where name = ?")) {
+            ps.setString(1, name);
+            try (ResultSet rs = ps.executeQuery()) { /* ... */ }
+        }
+      python: |
+        # DB-API parameter binding (sqlite3 uses ?, psycopg uses %s)
+        cur.execute("select * from users where name = ?", (name,))
+    refs:
+      - https://cwe.mitre.org/data/definitions/89.html
+      - https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html
+
+  CWE-79:
+    title: Cross-site Scripting (XSS)
+    why: Request data is written into an HTML response without output encoding, so a crafted value runs JavaScript in the victim's browser.
+    fix:
+      java: |
+        // OWASP Java Encoder: encode for the exact output context
+        import org.owasp.encoder.Encode;
+        response.getWriter().println("<br>data = " + Encode.forHtml(data));
+      python: |
+        from markupsafe import escape
+        return make_response("<br>data = " + escape(data))
+        # or render_template(...) with Jinja2 autoescaping (default in Flask)
+    refs:
+      - https://cwe.mitre.org/data/definitions/79.html
+      - https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+
+  CWE-22:
+    title: Path Traversal
+    why: A user-supplied value controls a file path, so '../' or an absolute path can read or overwrite files outside the intended directory.
+    fix:
+      java: |
+        Path base = Paths.get("/srv/uploads").toRealPath();
+        Path target = base.resolve(userName).normalize();
+        if (!target.startsWith(base)) {
+            throw new SecurityException("path escapes upload directory");
+        }
+      python: |
+        from werkzeug.utils import secure_filename
+        path = os.path.join(UPLOAD_ROOT, secure_filename(name))
+        # or: flask.safe_join(UPLOAD_ROOT, name)  (returns None if unsafe)
+    refs:
+      - https://cwe.mitre.org/data/definitions/22.html
+      - https://owasp.org/www-community/attacks/Path_Traversal
+
+  CWE-798:
+    title: Hard-coded Credentials / Secrets
+    why: Anyone with read access to the repository (or its history, forks, CI logs) obtains the credential. Removing it from the latest commit is not enough.
+    fix:
+      java: |
+        String password = System.getenv("DB_PASSWORD");   // injected by the platform
+        Connection c = DriverManager.getConnection(url, user, password);
+      python: |
+        import os
+        secret = os.environ["JWT_SIGNING_KEY"]            # or a secret manager client
+    extra: |
+      1. **Rotate/revoke the exposed value now** — it is already in git history.
+      2. Store it in GitHub Actions secrets / Vault / cloud secret manager.
+      3. If needed, purge history with `git filter-repo` after rotation.
+    refs:
+      - https://cwe.mitre.org/data/definitions/798.html
+      - https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html
+
+  CWE-327:
+    title: Broken or Risky Cryptographic Algorithm
+    why: Cipher.getInstance("AES") defaults to ECB mode, which leaks plaintext patterns.
+    fix:
+      java: |
+        Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
+        c.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv));
+      python: |
+        from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+        ct = AESGCM(key).encrypt(nonce, data, None)
+    refs:
+      - https://cwe.mitre.org/data/definitions/327.html
+
+  CWE-1395:
+    title: Dependency on Vulnerable Third-Party Component
+    why: A declared dependency version has a published CVE; code paths using the package inherit the vulnerability.
+    fix:
+      generic: |
+        Upgrade to the fixed version shown above, regenerate the lock file,
+        run the test suite, and commit the manifest + SBOM together.
+    refs:
+      - https://cwe.mitre.org/data/definitions/1395.html
+      - https://owasp.org/Top10/A06_2021-Vulnerable_and_Outdated_Components/
+
+  default:
+    title: Security finding
+    why: The rule reported a potential weakness; review the linked CWE for context.
+    fix:
+      generic: Follow the rule message and the CWE reference below.
+    refs: []

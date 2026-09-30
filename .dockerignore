@@ -1,0 +1,5 @@
+.git
+results
+rules/registry
+.cache
+**/__pycache__

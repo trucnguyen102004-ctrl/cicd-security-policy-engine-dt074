@@ -1,0 +1,154 @@
+# DT074 custom taint rules for Java.
+# Sources/sinks/sanitisers follow the OWASP / find-sec-bugs threat model, not the
+# evaluation samples. Two source tiers encode OWASP Risk Rating "likelihood":
+#   web request input            -> likelihood HIGH
+#   environment / I/O streams     -> likelihood MEDIUM (attacker needs a foothold)
+# Deliberately NOT sources: System.getProperty, java.util.Properties (trusted config).
+rules:
+  # ------------------------------------------------------------------ CWE-89
+  - id: dt074.java.sqli.tainted-jdbc
+    mode: taint
+    languages: [java]
+    severity: ERROR
+    message: >-
+      Untrusted input from '$SRC' reaches a JDBC query string. Use a
+      PreparedStatement with '?' placeholders and bind the value with setString().
+    metadata: &sqli
+      cwe: ["CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"]
+      owasp: ["A03:2021 - Injection"]
+      category: security
+      subcategory: [vuln]
+      confidence: HIGH
+      likelihood: HIGH
+      impact: HIGH
+      remediation_key: CWE-89
+    pattern-sources:
+      - patterns: &websrc
+          - pattern-either:
+              - pattern: (javax.servlet.http.HttpServletRequest $REQ).$M(...)
+              - pattern: (jakarta.servlet.http.HttpServletRequest $REQ).$M(...)
+              - pattern: (HttpServletRequest $REQ).$M(...)
+          - metavariable-regex:
+              metavariable: $M
+              regex: ^(getParameter|getParameterValues|getParameterMap|getHeader|getHeaders|getQueryString|getCookies|getInputStream|getReader|getRequestURI|getPathInfo)$
+          - pattern: $SRC
+    pattern-sinks: &sqlsink
+      - patterns:
+          - pattern-either:
+              - pattern: $ST.$EXEC($Q, ...)
+          - metavariable-regex:
+              metavariable: $EXEC
+              regex: ^(execute|executeQuery|executeUpdate|executeLargeUpdate|addBatch|prepareStatement|prepareCall|nativeSQL)$
+          - focus-metavariable: $Q
+
+  - id: dt074.java.sqli.tainted-jdbc-nonweb
+    mode: taint
+    languages: [java]
+    severity: WARNING
+    message: >-
+      Data read from '$SRC' (environment or I/O stream) reaches a JDBC query
+      string. Treat it as untrusted: use a PreparedStatement with bound parameters.
+    metadata:
+      <<: *sqli
+      likelihood: MEDIUM
+    pattern-sources:
+      - patterns: &nonwebsrc
+          - pattern-either:
+              - pattern: System.getenv(...)
+              - pattern: (java.io.BufferedReader $BR).readLine()
+              - pattern: (BufferedReader $BR).readLine()
+          - pattern: $SRC
+    pattern-sinks: *sqlsink
+
+  # ------------------------------------------------------------------ CWE-79
+  - id: dt074.java.xss.tainted-servlet-writer
+    mode: taint
+    languages: [java]
+    severity: ERROR
+    message: >-
+      Untrusted input from '$SRC' is written to the HTTP response without HTML
+      encoding. Encode it (OWASP Encoder Encode.forHtml / StringEscapeUtils.escapeHtml4).
+    metadata: &xss
+      cwe: ["CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')"]
+      owasp: ["A03:2021 - Injection"]
+      category: security
+      subcategory: [vuln]
+      confidence: HIGH
+      likelihood: HIGH
+      impact: MEDIUM
+      remediation_key: CWE-79
+    pattern-sources:
+      - patterns: *websrc
+    pattern-sinks: &xsssink
+      - patterns:
+          - pattern-either:
+              - pattern: $RESP.getWriter().$P($X, ...)
+              - pattern: $RESP.getOutputStream().$P($X, ...)
+          - metavariable-regex:
+              metavariable: $P
+              regex: ^(print|println|write|format|printf|append)$
+          - focus-metavariable: $X
+    pattern-sanitizers: &xsssan
+      - pattern-either:
+          - pattern: org.owasp.encoder.Encode.$F(...)
+          - pattern: Encode.$F(...)
+          - pattern: StringEscapeUtils.escapeHtml4(...)
+          - pattern: StringEscapeUtils.escapeHtml(...)
+          - pattern: HtmlUtils.htmlEscape(...)
+          - pattern: ESAPI.encoder().encodeForHTML(...)
+
+  # ------------------------------------------------------------ CWE-22/23/36
+  - id: dt074.java.path.tainted-file-access
+    mode: taint
+    languages: [java]
+    severity: ERROR
+    message: >-
+      Untrusted input from '$SRC' controls a filesystem path. Canonicalise the
+      path and verify it stays under the allowed base directory, or keep only
+      the file name (FilenameUtils.getName).
+    metadata: &path
+      cwe: ["CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"]
+      owasp: ["A01:2021 - Broken Access Control"]
+      category: security
+      subcategory: [vuln]
+      confidence: HIGH
+      likelihood: HIGH
+      impact: HIGH
+      remediation_key: CWE-22
+    pattern-sources:
+      - patterns: *websrc
+    pattern-sinks: &pathsink
+      - patterns:
+          - pattern-either:
+              - pattern: new java.io.File($X, ...)
+              - pattern: new File($X, ...)
+              - pattern: new File($P, $X)
+              - pattern: new FileInputStream($X, ...)
+              - pattern: new FileOutputStream($X, ...)
+              - pattern: new FileReader($X, ...)
+              - pattern: new FileWriter($X, ...)
+              - pattern: new RandomAccessFile($X, ...)
+              - pattern: java.nio.file.Paths.get($X, ...)
+              - pattern: Paths.get($X, ...)
+              - pattern: Path.of($X, ...)
+          - focus-metavariable: $X
+    pattern-sanitizers: &pathsan
+      - pattern-either:
+          - pattern: FilenameUtils.getName(...)
+          - pattern: org.apache.commons.io.FilenameUtils.getName(...)
+          - pattern: $P.getFileName()
+
+  - id: dt074.java.path.tainted-file-access-nonweb
+    mode: taint
+    languages: [java]
+    severity: WARNING
+    message: >-
+      Data read from '$SRC' (environment or I/O stream) controls a filesystem
+      path. Canonicalise and confine it to the allowed base directory.
+    metadata:
+      <<: *path
+      likelihood: MEDIUM
+    pattern-sources:
+      - patterns: *nonwebsrc
+    pattern-sinks: *pathsink
+    pattern-sanitizers: *pathsan

@@ -1,0 +1,2 @@
+# Gate engine dependencies (scanner versions are pinned in the Dockerfile).
+PyYAML==6.0.3

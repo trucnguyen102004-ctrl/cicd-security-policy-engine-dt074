@@ -386,7 +386,8 @@ def build(zip_path: Path) -> list[dict]:
     with zipfile.ZipFile(zip_path) as zf:
         for split, base, cases in (("main", SARD, JAVA_CASES), ("holdout", HOLDOUT, HOLDOUT_CASES)):
             for cid, cwe, rel in cases:
-                src = zf.read(JULIET_PREFIX + rel).decode("utf-8")
+                # Juliet ships CRLF; normalise so hashes match on every OS / git checkout
+                src = zf.read(JULIET_PREFIX + rel).decode("utf-8").replace("\r\n", "\n")
                 cls = Path(rel).stem
                 bad, good = split_juliet(src, cls)
                 for label, text in (("bad", bad), ("good", good)):

@@ -11,6 +11,7 @@ import argparse
 import json
 import os
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
@@ -38,10 +39,16 @@ def summary(results: Path, run_url: str) -> str:
 
 def post(url: str, payload: dict | None = None, form: dict | None = None) -> None:
     data = json.dumps(payload).encode() if payload is not None else urllib.parse.urlencode(form).encode()
-    headers = {"Content-Type": "application/json"} if payload is not None else {}
+    # Discord (behind Cloudflare) rejects the default "Python-urllib" agent with 403.
+    headers = {"User-Agent": "DT074-SecurityGate/1.0 (+https://github.com/trucnguyen102004-ctrl/cicd-security-policy-engine-dt074)"}
+    if payload is not None:
+        headers["Content-Type"] = "application/json"
     req = urllib.request.Request(url, data=data, headers=headers, method="POST")
-    with urllib.request.urlopen(req, timeout=10) as resp:
-        resp.read()
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            resp.read()
+    except urllib.error.HTTPError as err:   # surface the reason in the CI log
+        raise RuntimeError(f"HTTP {err.code}: {err.read()[:200]!r}") from None
 
 
 def main() -> int:

@@ -48,10 +48,10 @@ outputs:
 runs:
   using: composite
   steps:
-    - uses: docker/setup-buildx-action@v3
+    - uses: docker/setup-buildx-action@v4
 
     - name: Build pinned scanner image (cached)
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@v7
       with:
         context: ${{ github.action_path }}
         load: true
@@ -119,15 +119,16 @@ runs:
 
     - name: Upload gate report
       if: always()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: security-gate-report-${{ github.run_id }}-${{ github.run_attempt }}
         path: .gate-out/
+        include-hidden-files: true    # .gate-out is a dot-directory (skipped by default since v4.4)
         retention-days: 30
 
     - name: Comment feedback on PR
       if: always() && inputs.comment-on-pr == 'true' && github.event_name == 'pull_request'
-      uses: actions/github-script@v7
+      uses: actions/github-script@v9
       with:
         github-token: ${{ inputs.github-token }}
         script: |
@@ -148,7 +149,7 @@ runs:
 
     - name: Upload SARIF to code scanning
       if: always() && inputs.upload-sarif == 'true'
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: .gate-out/findings.sarif
         category: dt074-security-gate

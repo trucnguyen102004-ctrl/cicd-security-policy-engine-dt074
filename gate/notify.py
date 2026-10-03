@@ -23,15 +23,31 @@ def summary(results: Path, run_url: str) -> str:
     blocking = [f for f in findings if f["blocking"]]
     repo = os.environ.get("GITHUB_REPOSITORY", "local")
     ref = os.environ.get("GITHUB_HEAD_REF") or os.environ.get("GITHUB_REF_NAME", "")
-    lines = [f"🔒 Security gate {decision['decision']} — {repo} ({ref})",
-             f"{len(blocking)} blocking finding(s), {decision['counts']['total']} total, "
-             f"{decision['total_seconds']:.1f}s"]
-    for f in blocking[:5]:
-        cwe = (f["cwe"] or ["?"])[0]
-        where = f["file"] if f["category"] == "sca" else f"{f['file']}:{f['line']}"
-        lines.append(f"• [{f['severity']}] {cwe} {f['rule_id'].rsplit('.', 1)[-1]} @ {where}")
-    if len(blocking) > 5:
-        lines.append(f"• … and {len(blocking) - 5} more")
+    # Same grouping as the PR feedback: one line per file + weakness category, so
+    # several rules reporting one bug produce one notification line.
+    order = ["INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    issues: dict[tuple, list] = {}
+    for f in blocking:
+        kind = "secret" if f["category"] == "secret" or "CWE-798" in f["cwe"] or "CWE-522" in f["cwe"] \
+            else f["package"] if f["category"] == "sca" else (f["cwe"] or ["?"])[0]
+        issues.setdefault((f["file"], kind), []).append(f)
+    ranked = sorted(issues.values(), key=lambda g: -max(order.index(x["severity"]) for x in g))
+    n_issues = decision["counts"].get("blocking_issues", len(ranked))
+    lines = [f"🔒 **Security gate {decision['decision']}** — `{repo}`" + (f" (`{ref}`)" if ref else ""),
+             f"{n_issues} blocking issue(s) from {len(blocking)} finding(s) · {decision['total_seconds']:.1f}s"]
+    for group in ranked[:5]:
+        top = max(group, key=lambda x: order.index(x["severity"]))
+        if top["category"] == "sca":   # developers act on package + CVE ids, not CWE lists
+            cves = sorted({x["vuln_id"] for x in group if x.get("vuln_id")})
+            cwes = f"{top['package']} {top['installed']} {', '.join(cves[:3])}{' …' if len(cves) > 3 else ''}"
+        else:
+            cwes = ", ".join(sorted({c for x in group for c in x["cwe"]}))
+        where = top["file"] if top["category"] == "sca" else f"{top['file']}:{top['line']}"
+        extra = f" (+{len(group) - 1} more finding(s))" if len(group) > 1 else ""
+        # backticks stop Discord/Slack markdown from eating '_' in file names
+        lines.append(f"• [{top['severity']}] {cwes} `{where}`{extra}")
+    if len(ranked) > 5:
+        lines.append(f"• … and {len(ranked) - 5} more issue(s)")
     if run_url:
         lines.append(run_url)
     return "\n".join(lines)

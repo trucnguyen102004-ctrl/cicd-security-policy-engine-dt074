@@ -10,7 +10,8 @@ Course: An toàn và bảo mật hệ thống thông tin — Lecturer: ThS. Ph�
 Student: Nguyễn Lê Anh Trúc — MSSV 1150080078 — Lớp 11ĐHCNPM1
 Reference paper: Assal et al., *Software security in practice: knowledge and
 motivation*, Journal of Cybersecurity 11(1), 2025, [10.1093/cybsec/tyaf005](https://doi.org/10.1093/cybsec/tyaf005)
-(see [docs/PAPER_MAPPING.md](docs/PAPER_MAPPING.md)).
+(Vietnamese section-by-section summary: [docs/PAPER_SUMMARY_VI.md](docs/PAPER_SUMMARY_VI.md);
+reproduction sheet: [docs/PAPER_MAPPING.md](docs/PAPER_MAPPING.md)).
 
 ## What is compared
 

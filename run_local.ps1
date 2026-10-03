@@ -51,8 +51,6 @@ switch ($Task) {
                                  "--cases", "J01-bad,J01-good,P01-bad,P01-good,S01-bad,S03-good",
                                  "--out", "/src/results/exp3-scale") }
     "analyze"    { python "$Root\scripts\analyze.py" "$Root\results\$Arg" --charts }   # host: pip install -r requirements-dev.txt
-esults\$Arg" --charts }   # host: pip install -r requirements-dev.txt
-esults\$Arg" --charts }   # host: pip install -r requirements-dev.txt
     "test"       { Invoke-Gate @("python", "-m", "unittest", "discover", "-s", "/src/tests", "-v") }
     "gate"       { Invoke-Gate @("python", "/src/gate/cli.py", "--mode", "adaptive", "--repo", "/src",
                                  "--base", "HEAD~1", "--out", "/src/.gate-out") }

@@ -11,6 +11,7 @@ aliases:
   CWE-321: CWE-798
   CWE-522: CWE-798
   CWE-547: CWE-798
+  CWE-77: CWE-78
   CWE-1104: CWE-1395
   CWE-937: CWE-1395
 
@@ -32,6 +33,22 @@ entries:
     refs:
       - https://cwe.mitre.org/data/definitions/89.html
       - https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html
+
+  CWE-78:
+    title: OS Command Injection
+    why: External input becomes part of a shell command, so metacharacters (; | && $()) run arbitrary commands with the program's privileges.
+    fix:
+      c: |
+        /* No shell: exec the program directly with a fixed argv. */
+        char *const argv[] = {"/bin/ls", "--", validated_path, NULL};
+        execv(argv[0], argv);   /* validate validated_path against an allow-list first */
+      java: |
+        new ProcessBuilder("ls", "--", validatedPath).start();   // no "sh -c", args as a list
+      python: |
+        subprocess.run(["ls", "--", validated_path], check=True)  # shell=False (default)
+    refs:
+      - https://cwe.mitre.org/data/definitions/78.html
+      - https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html
 
   CWE-79:
     title: Cross-site Scripting (XSS)
@@ -63,6 +80,10 @@ entries:
         from werkzeug.utils import secure_filename
         path = os.path.join(UPLOAD_ROOT, secure_filename(name))
         # or: flask.safe_join(UPLOAD_ROOT, name)  (returns None if unsafe)
+      c: |
+        char resolved[PATH_MAX];
+        if (!realpath(path, resolved) || strncmp(resolved, BASE "/", strlen(BASE) + 1) != 0)
+            return -1;   /* outside the allowed directory */
     refs:
       - https://cwe.mitre.org/data/definitions/22.html
       - https://owasp.org/www-community/attacks/Path_Traversal
@@ -77,6 +98,8 @@ entries:
       python: |
         import os
         secret = os.environ["JWT_SIGNING_KEY"]            # or a secret manager client
+      c: |
+        const char *password = getenv("SERVICE_PASSWORD"); /* or OS credential store */
     extra: |
       1. **Rotate/revoke the exposed value now** — it is already in git history.
       2. Store it in GitHub Actions secrets / Vault / cloud secret manager.

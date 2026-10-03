@@ -22,7 +22,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import yaml  # noqa: E402
 from evaluate_gate import GATE_ROOT, evaluate, in_scope, matches_any  # noqa: E402
 
-LANG_BY_EXT = {".java": "java", ".py": "python"}
+LANG_BY_EXT = {".java": "java", ".py": "python",
+               ".c": "c", ".h": "c", ".cpp": "c", ".cc": "c", ".hpp": "c"}   # Semgrep "c" rules also parse C++
 TIME_BIN = shutil.which("time") if os.path.exists("/usr/bin/time") else None
 
 
@@ -42,7 +43,9 @@ def run_tool(name: str, cmd: list[str], out: Path, cwd: Path, tools: dict) -> bo
     rec = {"status": "ok" if proc.returncode == 0 else "error", "exit_code": proc.returncode,
            "wall": round(wall, 3), "cmd": " ".join(cmd)}
     if tfile.exists():
-        parts = tfile.read_text().split()
+        # GNU time prepends "Command exited with non-zero status N" on failure
+        lines = tfile.read_text().strip().splitlines()
+        parts = lines[-1].split() if lines else []
         if len(parts) >= 4:
             rec.update(cpu=round(float(parts[1]) + float(parts[2]), 3), max_rss_kb=int(parts[3]))
         tfile.unlink()
@@ -186,5 +189,23 @@ def main() -> None:
     sys.exit(result["exit_code"])
 
 
+def fail_closed(out: Path, exc: BaseException) -> None:
+    """Any unexpected gate error must still produce a BLOCK decision (never fail open)."""
+    out.mkdir(parents=True, exist_ok=True)
+    result = {"mode": "unknown", "decision": "BLOCK", "exit_code": 1, "failed_tools": ["gate"],
+              "error": f"{type(exc).__name__}: {exc}", "counts": {"total": 0, "blocking": 0, "advisory": 0},
+              "total_seconds": 0.0, "tools": {}}
+    (out / "decision.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+    (out / "findings.json").write_text("[]", encoding="utf-8")
+    print(f"[gate] internal error -> BLOCK (fail-closed): {result['error']}", file=sys.stderr)
+
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        out_arg = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else ".gate-out"
+        fail_closed(Path(out_arg).resolve(), exc)
+        sys.exit(1)

@@ -393,7 +393,11 @@ def snippet(repo: Path, f: Finding, ctx: int) -> str:
 
 
 def lang_of(path: str) -> str:
-    return "java" if path.endswith((".java", "pom.xml")) else "python"
+    if path.endswith((".java", "pom.xml")):
+        return "java"
+    if path.endswith((".c", ".h", ".cpp", ".cc", ".hpp")):
+        return "c"
+    return "python"
 
 
 def render_feedback(findings: list[Finding], decision: dict, policy: dict, repo: Path, meta: dict) -> str:

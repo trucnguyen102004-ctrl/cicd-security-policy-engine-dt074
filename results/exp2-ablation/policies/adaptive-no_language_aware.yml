@@ -1,0 +1,103 @@
+version: 1
+name: adaptive-no_language_aware
+scope:
+  differential: true
+  include:
+  - '**'
+  exclude:
+  - dataset/**
+  - results/**
+  - '**/test/**'
+  - '**/tests/**'
+  - '**/*.md'
+  dependency_manifests:
+  - '**/requirements*.txt'
+  - '**/pyproject.toml'
+  - '**/Pipfile.lock'
+  - '**/poetry.lock'
+  - '**/pom.xml'
+  - '**/build.gradle'
+  - '**/build.gradle.kts'
+  - '**/gradle.lockfile'
+sast:
+  language_aware: false
+  configs:
+  - path: '{registry}/p-java.yml'
+    languages:
+    - java
+  - path: '{registry}/p-python.yml'
+    languages:
+    - python
+  - path: '{registry}/p-secrets.yml'
+  - path: '{gate}/rules/custom/java-taint.yml'
+    languages:
+    - java
+  - path: '{gate}/rules/custom/java-hardcoded.yml'
+    languages:
+    - java
+  - path: '{gate}/rules/custom/python-taint.yml'
+    languages:
+    - python
+  - path: '{gate}/rules/custom/python-secrets.yml'
+    languages:
+    - python
+  block_at: HIGH
+  min_confidence: MEDIUM
+  audit_blocks: false
+  sanitizer_triage: true
+  sanitizers:
+    python:
+    - \bescape\(
+    - \bhtml\.escape\(
+    - \bsecure_filename\(
+    - \bsafe_join\(
+    - \bjsonify\(
+    - \bbleach\.clean\(
+    - \brender_template\(
+    java:
+    - \bEncode\.for\w+\(
+    - \bescapeHtml4?\(
+    - \bencodeForHTML\(
+    - \bhtmlEscape\(
+    - \bsetString\(
+    - \bFilenameUtils\.getName\(
+secrets:
+  block: true
+  allow_paths: []
+sca:
+  only_new_components: true
+  always_block:
+  - CRITICAL
+  block_at: HIGH
+  require_fix_available: true
+  require_reachable: true
+  python_import_names:
+    pyyaml:
+    - yaml
+    pillow:
+    - PIL
+    beautifulsoup4:
+    - bs4
+    scikit-learn:
+    - sklearn
+    opencv-python:
+    - cv2
+    python-dateutil:
+    - dateutil
+    pyjwt:
+    - jwt
+    psycopg2-binary:
+    - psycopg2
+    protobuf:
+    - google.protobuf
+sbom:
+  format: cyclonedx-json
+  only_on_manifest_change: true
+feedback:
+  markdown: SECURITY_GATE_FEEDBACK.md
+  max_advisories: 25
+  context_lines: 2
+override:
+  enabled: true
+  min_reason_length: 15
+description: load every rule pack regardless of changed languages

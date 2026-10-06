@@ -1,0 +1,18 @@
+{
+  "runs": 3,
+  "seed": 42,
+  "profiles": "isolated,realistic",
+  "splits": "cpp112",
+  "variants": {
+    "baseline": "/src/policy/cpp/baseline.yml",
+    "adaptive": "/src/policy/cpp/adaptive.yml"
+  },
+  "ablation": false,
+  "scale": "0",
+  "cases": "",
+  "out": "results/exp4-cpp112",
+  "labels": "labels_cpp.csv",
+  "policy_dir": "policy/cpp",
+  "keep_raw": true,
+  "n_cases": 24
+}

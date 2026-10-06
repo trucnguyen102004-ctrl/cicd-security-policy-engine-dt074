@@ -1,0 +1,1076 @@
+{
+  "isolated|0|all|adaptive": {
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "tn": 12,
+    "recall": 0.0,
+    "recall_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "fbr": 0.0,
+    "fbr_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "precision": NaN,
+    "f1": 0.0,
+    "mcc": 0.0,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 4.872027777777777,
+    "wall_sd": 0.2941705920816973,
+    "wall_p50": 4.854,
+    "wall_p95": 5.459,
+    "run_mean_sd": 0.18257500519826933,
+    "wall_cv": 0.06037949812672743,
+    "cpu_mean": 4.3005555555555555,
+    "rss_max": 182.1,
+    "rss_mean": 177.44583333333333,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-78": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-798": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-22": [
+        0,
+        4,
+        0,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C03-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C04-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C05-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C06-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C07-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C08-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C09-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C10-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C11-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C12-bad",
+        "type": "FN",
+        "rules": []
+      }
+    ],
+    "vs_baseline": {
+      "mcnemar_b_only_baseline_correct": 5,
+      "mcnemar_c_only_variant_correct": 4,
+      "mcnemar_p": 1.0,
+      "wall_diff_mean": -6.337972222222223,
+      "wall_diff_ci": [
+        -6.464638888888889,
+        -6.219416666666667
+      ],
+      "speedup": 2.300890001311341
+    }
+  },
+  "isolated|0|all|baseline": {
+    "tp": 5,
+    "fn": 7,
+    "fp": 4,
+    "tn": 8,
+    "recall": 0.4166666666666667,
+    "recall_ci": [
+      0.1932603124346072,
+      0.6804886891575758
+    ],
+    "fbr": 0.3333333333333333,
+    "fbr_ci": [
+      0.13812009012485987,
+      0.6093779130595061
+    ],
+    "precision": 0.5555555555555556,
+    "f1": 0.4761904761904762,
+    "mcc": 0.08606629658238706,
+    "balanced_acc": 0.5416666666666667,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 11.21,
+    "wall_sd": 0.632270333518731,
+    "wall_p50": 11.144,
+    "wall_p95": 12.199,
+    "run_mean_sd": 0.44292432770106993,
+    "wall_cv": 0.05640234910961025,
+    "cpu_mean": 10.857083333333334,
+    "rss_max": 258.6,
+    "rss_mean": 247.90277777777777,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-78": [
+        3,
+        4,
+        4,
+        4
+      ],
+      "CWE-798": [
+        2,
+        4,
+        0,
+        4
+      ],
+      "CWE-22": [
+        0,
+        4,
+        0,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C02-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C03-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C04-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C05-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C06-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C07-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C08-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C10-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C12-bad",
+        "type": "FN",
+        "rules": []
+      }
+    ]
+  },
+  "isolated|0|cpp112|adaptive": {
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "tn": 12,
+    "recall": 0.0,
+    "recall_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "fbr": 0.0,
+    "fbr_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "precision": NaN,
+    "f1": 0.0,
+    "mcc": 0.0,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 4.872027777777777,
+    "wall_sd": 0.2941705920816973,
+    "wall_p50": 4.854,
+    "wall_p95": 5.459,
+    "run_mean_sd": 0.18257500519826933,
+    "wall_cv": 0.06037949812672743,
+    "cpu_mean": 4.3005555555555555,
+    "rss_max": 182.1,
+    "rss_mean": 177.44583333333333,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-78": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-798": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-22": [
+        0,
+        4,
+        0,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C03-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C04-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C05-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C06-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C07-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C08-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C09-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C10-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C11-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C12-bad",
+        "type": "FN",
+        "rules": []
+      }
+    ],
+    "vs_baseline": {
+      "mcnemar_b_only_baseline_correct": 5,
+      "mcnemar_c_only_variant_correct": 4,
+      "mcnemar_p": 1.0,
+      "wall_diff_mean": -6.337972222222223,
+      "wall_diff_ci": [
+        -6.464638888888889,
+        -6.219416666666667
+      ],
+      "speedup": 2.300890001311341
+    }
+  },
+  "isolated|0|cpp112|baseline": {
+    "tp": 5,
+    "fn": 7,
+    "fp": 4,
+    "tn": 8,
+    "recall": 0.4166666666666667,
+    "recall_ci": [
+      0.1932603124346072,
+      0.6804886891575758
+    ],
+    "fbr": 0.3333333333333333,
+    "fbr_ci": [
+      0.13812009012485987,
+      0.6093779130595061
+    ],
+    "precision": 0.5555555555555556,
+    "f1": 0.4761904761904762,
+    "mcc": 0.08606629658238706,
+    "balanced_acc": 0.5416666666666667,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 11.21,
+    "wall_sd": 0.632270333518731,
+    "wall_p50": 11.144,
+    "wall_p95": 12.199,
+    "run_mean_sd": 0.44292432770106993,
+    "wall_cv": 0.05640234910961025,
+    "cpu_mean": 10.857083333333334,
+    "rss_max": 258.6,
+    "rss_mean": 247.90277777777777,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-78": [
+        3,
+        4,
+        4,
+        4
+      ],
+      "CWE-798": [
+        2,
+        4,
+        0,
+        4
+      ],
+      "CWE-22": [
+        0,
+        4,
+        0,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C02-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C03-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C04-good",
+        "type": "FP",
+        "rules": [
+          "insecure-use-strcat-fn"
+        ]
+      },
+      {
+        "case": "C05-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C06-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C07-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C08-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C10-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C12-bad",
+        "type": "FN",
+        "rules": []
+      }
+    ]
+  },
+  "realistic|0|all|adaptive": {
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "tn": 12,
+    "recall": 0.0,
+    "recall_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "fbr": 0.0,
+    "fbr_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "precision": NaN,
+    "f1": 0.0,
+    "mcc": 0.0,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 4.909055555555556,
+    "wall_sd": 0.5501966073407436,
+    "wall_p50": 4.799,
+    "wall_p95": 5.495,
+    "run_mean_sd": 0.17897668868484665,
+    "wall_cv": 0.11207789382584775,
+    "cpu_mean": 4.354444444444444,
+    "rss_max": 182.0,
+    "rss_mean": 177.44722222222222,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-22": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-798": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-78": [
+        0,
+        4,
+        0,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C03-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C04-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C05-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C06-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C07-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C08-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C09-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C10-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C11-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C12-bad",
+        "type": "FN",
+        "rules": []
+      }
+    ],
+    "vs_baseline": {
+      "mcnemar_b_only_baseline_correct": 12,
+      "mcnemar_c_only_variant_correct": 12,
+      "mcnemar_p": 1.0,
+      "wall_diff_mean": -6.381944444444445,
+      "wall_diff_ci": [
+        -6.579708333333333,
+        -6.194527777777777
+      ],
+      "speedup": 2.3000350825571787
+    }
+  },
+  "realistic|0|all|baseline": {
+    "tp": 12,
+    "fn": 0,
+    "fp": 12,
+    "tn": 0,
+    "recall": 1.0,
+    "recall_ci": [
+      0.7575059904469021,
+      1.0
+    ],
+    "fbr": 1.0,
+    "fbr_ci": [
+      0.7575059904469021,
+      1.0
+    ],
+    "precision": 0.5,
+    "f1": 0.6666666666666666,
+    "mcc": 0.0,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 11.291,
+    "wall_sd": 0.8308767641371966,
+    "wall_p50": 11.135,
+    "wall_p95": 13.045,
+    "run_mean_sd": 0.41684121135764696,
+    "wall_cv": 0.07358752671483453,
+    "cpu_mean": 11.13888888888889,
+    "rss_max": 284.3,
+    "rss_mean": 270.96805555555557,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-22": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "CWE-798": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "CWE-78": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C05-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C06-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C07-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C08-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C09-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C10-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C11-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C12-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      }
+    ]
+  },
+  "realistic|0|cpp112|adaptive": {
+    "tp": 0,
+    "fn": 12,
+    "fp": 0,
+    "tn": 12,
+    "recall": 0.0,
+    "recall_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "fbr": 0.0,
+    "fbr_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "precision": NaN,
+    "f1": 0.0,
+    "mcc": 0.0,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 4.909055555555556,
+    "wall_sd": 0.5501966073407436,
+    "wall_p50": 4.799,
+    "wall_p95": 5.495,
+    "run_mean_sd": 0.17897668868484665,
+    "wall_cv": 0.11207789382584775,
+    "cpu_mean": 4.354444444444444,
+    "rss_max": 182.0,
+    "rss_mean": 177.44722222222222,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-22": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-798": [
+        0,
+        4,
+        0,
+        4
+      ],
+      "CWE-78": [
+        0,
+        4,
+        0,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C02-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C03-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C04-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C05-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C06-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C07-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C08-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C09-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C10-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C11-bad",
+        "type": "FN",
+        "rules": []
+      },
+      {
+        "case": "C12-bad",
+        "type": "FN",
+        "rules": []
+      }
+    ],
+    "vs_baseline": {
+      "mcnemar_b_only_baseline_correct": 12,
+      "mcnemar_c_only_variant_correct": 12,
+      "mcnemar_p": 1.0,
+      "wall_diff_mean": -6.381944444444445,
+      "wall_diff_ci": [
+        -6.579708333333333,
+        -6.194527777777777
+      ],
+      "speedup": 2.3000350825571787
+    }
+  },
+  "realistic|0|cpp112|baseline": {
+    "tp": 12,
+    "fn": 0,
+    "fp": 12,
+    "tn": 0,
+    "recall": 1.0,
+    "recall_ci": [
+      0.7575059904469021,
+      1.0
+    ],
+    "fbr": 1.0,
+    "fbr_ci": [
+      0.7575059904469021,
+      1.0
+    ],
+    "precision": 0.5,
+    "f1": 0.6666666666666666,
+    "mcc": 0.0,
+    "balanced_acc": 0.5,
+    "matched_recall": 0.0,
+    "matched_ci": [
+      0.0,
+      0.2424940095530979
+    ],
+    "matched_k": 0,
+    "matched_n": 12,
+    "n_cases": 24,
+    "n_exec": 72,
+    "runs": 3,
+    "wall_mean": 11.291,
+    "wall_sd": 0.8308767641371966,
+    "wall_p50": 11.135,
+    "wall_p95": 13.045,
+    "run_mean_sd": 0.41684121135764696,
+    "wall_cv": 0.07358752671483453,
+    "cpu_mean": 11.13888888888889,
+    "rss_max": 284.3,
+    "rss_mean": 270.96805555555557,
+    "decision_stability": 1.0,
+    "by_cwe": {
+      "CWE-22": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "CWE-798": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "CWE-78": [
+        4,
+        4,
+        4,
+        4
+      ]
+    },
+    "errors": [
+      {
+        "case": "C01-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C02-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C03-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C04-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;insecure-use-strcat-fn;raw-html-format"
+        ]
+      },
+      {
+        "case": "C05-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C06-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C07-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C08-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C09-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C10-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C11-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      },
+      {
+        "case": "C12-good",
+        "type": "FP",
+        "rules": [
+          "CVE-2026-27205;CVE-2026-42198;CVE-2026-54291;directly-returned-format-string;raw-html-format"
+        ]
+      }
+    ]
+  }
+}

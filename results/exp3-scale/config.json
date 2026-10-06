@@ -1,0 +1,18 @@
+{
+  "runs": 3,
+  "seed": 42,
+  "profiles": "realistic",
+  "splits": "main,holdout",
+  "variants": {
+    "baseline": "/src/policy/baseline.yml",
+    "adaptive": "/src/policy/adaptive.yml"
+  },
+  "ablation": false,
+  "scale": "0,10,40",
+  "cases": "J01-bad,J01-good,P01-bad,P01-good,S01-bad,S03-good",
+  "out": "results/exp3-scale",
+  "labels": "labels.csv",
+  "policy_dir": "/src/policy",
+  "keep_raw": true,
+  "n_cases": 6
+}

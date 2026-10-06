@@ -1,0 +1,22 @@
+{
+  "runs": 1,
+  "seed": 42,
+  "profiles": "isolated,realistic",
+  "splits": "main,holdout",
+  "variants": {
+    "adaptive-no_differential": "/src/results/exp2-ablation/policies/adaptive-no_differential.yml",
+    "adaptive-no_language_aware": "/src/results/exp2-ablation/policies/adaptive-no_language_aware.yml",
+    "adaptive-no_custom_rules": "/src/results/exp2-ablation/policies/adaptive-no_custom_rules.yml",
+    "adaptive-no_risk_threshold": "/src/results/exp2-ablation/policies/adaptive-no_risk_threshold.yml",
+    "adaptive-no_sanitizer_triage": "/src/results/exp2-ablation/policies/adaptive-no_sanitizer_triage.yml",
+    "adaptive-no_sca_triage": "/src/results/exp2-ablation/policies/adaptive-no_sca_triage.yml"
+  },
+  "ablation": true,
+  "scale": "0",
+  "cases": "",
+  "out": "results/exp2-ablation",
+  "labels": "labels.csv",
+  "policy_dir": "/src/policy",
+  "keep_raw": true,
+  "n_cases": 56
+}

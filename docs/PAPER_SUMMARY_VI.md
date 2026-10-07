@@ -69,7 +69,7 @@ dụng thực hành bảo mật*. Kết quả:
 | Phương pháp | Phỏng vấn bán cấu trúc, khoảng 1 giờ, ghi âm và chép lời |
 | Chủ đề phỏng vấn | Công việc phát triển; thái độ với bảo mật; kiến thức bảo mật; quy trình bảo mật; hoạt động kiểm thử |
 | Người tham gia | 13 lập trình viên chuyên nghiệp, phản ánh 15 công ty (2 người kể cả nơi làm cũ) |
-| Đặc điểm | Kinh nghiệm trung bình 9,35 năm (trung vị 8); 26–38 tuổi; 4 nữ, 9 nam; đều có bằng đại học; tự đánh giá kiến thức bảo mật 2–5/5; doanh nghiệp lớn và vừa/nhỏ; nhóm 3–20 người |
+| Đặc điểm | Kinh nghiệm trung bình bài báo ghi 9,35 năm (tính lại từ Table 1 được 9,38; trung vị 8); 26–38 tuổi; 3 nữ, 10 nam; đều có bằng đại học; tự đánh giá kiến thức bảo mật 2–5/5; 7 doanh nghiệp lớn, 6 vừa/nhỏ; nhóm 3–20 người (xem `docs/PAPER_REPRODUCTION.md`) |
 | Tuyển chọn | Diễn đàn, mạng xã hội, quan hệ nghề nghiệp; quà tặng 20 USD |
 | Thu thập | 3 đợt, phân tích sơ bộ giữa các đợt, dừng khi bão hoà dữ liệu |
 | Phân tích | Grounded Theory (Strauss & Corbin): mã hoá mở (170 mã / 600 trích đoạn, Atlas.ti) → mã hoá trục (nhóm mã bằng Post-It) → mã hoá chọn lọc, với phạm trù lõi là **"nội hoá bảo mật"** |

@@ -6,8 +6,8 @@ Tập 11, Số 1, mã bài tyaf005, 2025. DOI: [10.1093/cybsec/tyaf005](https://
 
 > Tài liệu này là **bản tóm tắt và diễn giải** bằng lời của sinh viên, phục vụ học tập. Đây
 > **không phải bản dịch nguyên văn**. Các cụm từ trong ngoặc kép là trích ngắn từ bài báo để
-> giữ đúng thuật ngữ. Bản quyền: © The Author(s) 2025, Oxford University Press (open access).
-> Trước khi dịch toàn văn, cần kiểm tra điều khoản giấy phép ghi trên bản PDF.
+> giữ đúng thuật ngữ. Bản quyền: © The Author(s) 2025, Oxford University Press, phát hành
+> mở theo giấy phép CC BY-NC 4.0 (đã kiểm tra trên bản PDF).
 
 ---
 

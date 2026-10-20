@@ -90,7 +90,9 @@ def main() -> None:
     ap.add_argument("--head", default="HEAD")
     ap.add_argument("--out", type=Path, default=Path(".gate-out"))
     ap.add_argument("--policy", type=Path)
-    ap.add_argument("--registry", type=Path, default=GATE_ROOT / "rules" / "registry")
+    # frozen Semgrep Registry snapshot: baked into the image, or pointed to by GATE_REGISTRY
+    ap.add_argument("--registry", type=Path,
+                    default=Path(os.environ.get("GATE_REGISTRY", GATE_ROOT / "rules" / "registry")))
     args = ap.parse_args()
 
     t_start = time.perf_counter()

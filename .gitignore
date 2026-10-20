@@ -10,3 +10,4 @@ results/pilot/
 
 # third-party papers (copyrighted; keep local only)
 *.pdf
+results/demo/

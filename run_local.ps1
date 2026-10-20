@@ -27,10 +27,17 @@ if (-not $Docker) {
 }
 
 function Invoke-Gate([string[]]$Cmd) {
-    # /src = this repository; the frozen Semgrep rules + Trivy DB live inside the image
+    & $Docker info *> $null
+    if ($LASTEXITCODE -ne 0) { throw "Docker Desktop chua chay: mo Docker Desktop, doi 'Engine running' roi chay lai." }
+    # /src = this repository; the frozen Semgrep rules + Trivy DB live inside the image.
+    # Windows PowerShell 5.1 turns any native stderr line into a terminating error under
+    # 'Stop', so relax it while the container runs and judge success by the exit code.
+    $prev = $ErrorActionPreference; $ErrorActionPreference = "Continue"
     & $Docker run --rm -e GATE_REGISTRY=/opt/gate/rules/registry -v "${Root}:/src" -w /src `
-        --entrypoint $Cmd[0] $Image $Cmd[1..($Cmd.Length - 1)]
-    if ($LASTEXITCODE -ne 0 -and $Task -notin @("demo", "gate")) { throw "failed: $($Cmd -join ' ')" }
+        --entrypoint $Cmd[0] $Image $Cmd[1..($Cmd.Length - 1)] 2>&1 | ForEach-Object { "$_" }
+    $code = $LASTEXITCODE; $ErrorActionPreference = $prev
+    if ($code -ne 0 -and $Task -notin @("demo", "gate")) { throw "failed: $($Cmd -join ' ')" }
+    if ($Task -eq "gate") { Write-Host ("Gate exit code: {0}  (0 = PASS, 1 = BLOCK)" -f $code) }
 }
 
 switch ($Task) {

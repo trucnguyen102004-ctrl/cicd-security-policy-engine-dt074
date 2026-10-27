@@ -40,7 +40,7 @@ def read_file(name):
 def search():
     name = request.args.get("name", "")
     with _db() as conn:
-        rows = conn.execute("select id, name from users where name = '" + name + "'").fetchall()
+         rows = conn.execute("select id, name from users where name = ?", (name,)).fetchall()
     return jsonify(rows)
 
 

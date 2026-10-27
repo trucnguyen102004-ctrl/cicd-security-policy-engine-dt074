@@ -27,8 +27,13 @@ if (-not $Docker) {
 }
 
 function Invoke-Gate([string[]]$Cmd) {
+    $prev = $ErrorActionPreference; $ErrorActionPreference = "Continue"
     & $Docker info *> $null
-    if ($LASTEXITCODE -ne 0) { throw "Docker Desktop chua chay: mo Docker Desktop, doi 'Engine running' roi chay lai." }
+    $up = ($LASTEXITCODE -eq 0); $ErrorActionPreference = $prev
+    if (-not $up) {
+        Write-Host "Docker Desktop chua chay: mo Docker Desktop, doi 'Engine running' roi chay lai lenh." -ForegroundColor Yellow
+        exit 1
+    }
     # /src = this repository; the frozen Semgrep rules + Trivy DB live inside the image.
     # Windows PowerShell 5.1 turns any native stderr line into a terminating error under
     # 'Stop', so relax it while the container runs and judge success by the exit code.

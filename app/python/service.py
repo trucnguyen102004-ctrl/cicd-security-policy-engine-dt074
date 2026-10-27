@@ -36,6 +36,13 @@ def read_file(name):
     with open(os.path.join(UPLOAD_ROOT, safe), encoding="utf-8") as fh:
         return fh.read()
 
+@app.route("/search")
+def search():
+    name = request.args.get("name", "")
+    with _db() as conn:
+        rows = conn.execute("select id, name from users where name = '" + name + "'").fetchall()
+    return jsonify(rows)
+
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=int(os.environ.get("PORT", "8080")))
